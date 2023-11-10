@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:personal_finance/mock/mocked_sections.dart';
 import 'package:personal_finance/model/section.dart';
-
-import '../data/sections.dart';
 
 class SectionProvider extends ChangeNotifier {
   Section _section = sections[0];

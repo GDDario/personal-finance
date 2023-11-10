@@ -15,9 +15,9 @@ class _MainSectionState extends State<MainSection> {
     final SectionProvider provider = Provider.of<SectionProvider>(context);
     final Section section = provider.section;
 
-    return Container(
+    return Expanded(
       child: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(20.0),
         child: section.widget,
       ),
     );

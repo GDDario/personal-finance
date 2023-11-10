@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/data/sections.dart';
-import 'package:personal_finance/data/users.dart';
+import 'package:personal_finance/mock/mocked_sections.dart';
+import 'package:personal_finance/mock/mocked_users.dart';
 import 'package:personal_finance/model/section.dart';
 import 'package:personal_finance/provider/section_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,33 +18,58 @@ class CollapsableMenu extends StatelessWidget {
     final MenuProvider provider = Provider.of<MenuProvider>(buildContext);
     final bool isCollapsed = provider.isCollapsed;
 
-    return Container(
-      width: isCollapsed ? 72 : 250,
-      child: Drawer(
-        child: Container(
-          color: Color(0xFFFAFAFA),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: isCollapsed ? 72 : 250,
+          child: Drawer(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(18),
+                  width: double.infinity,
+                  child: _buildHeader(isCollapsed),
+                ),
+                const SizedBox(height: 24),
+                buildList(
+                    buildContext: buildContext,
+                    items: sections,
+                    isCollapsed: isCollapsed),
+                const SizedBox(height: 24),
+                Divider(color: Colors.white70),
+                Spacer(),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.settings),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              CollapseIcon(buildContext, isCollapsed),
               Container(
-                padding: EdgeInsets.all(18),
-                width: double.infinity,
-                child: _buildHeader(isCollapsed),
+                height: MediaQuery.of(buildContext).size.height - 36,
+                decoration: const BoxDecoration(
+                  border: Border(
+                    right: BorderSide(
+                      color: Color(0xFF3F51B5),
+                    ),
+                  ),
+                ),
               ),
-              const SizedBox(height: 24),
-              buildList(
-                  buildContext: buildContext,
-                  items: sections,
-                  isCollapsed: isCollapsed),
-              const SizedBox(height: 24),
-              Divider(color: Colors.white70),
-              Spacer(),
-              buildCollapseIcon(buildContext, isCollapsed),
-              const SizedBox(height: 12),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -106,30 +131,33 @@ class CollapsableMenu extends StatelessWidget {
     );
   }
 
-  Widget buildCollapseIcon(BuildContext context, bool isCollapsed) {
-    final double size = 52;
+  Widget CollapseIcon(BuildContext context, bool isCollapsed) {
     final icon = isCollapsed ? Icons.arrow_forward_ios : Icons.arrow_back_ios;
-    final alignment = isCollapsed ? Alignment.center : Alignment.centerRight;
-    final margin = isCollapsed ? null : EdgeInsets.only(right: 16);
-    final width = isCollapsed ? double.infinity : size;
+    final border = BorderSide(color: Color(0xFF3F51B5));
 
-    return Container(
-      alignment: alignment,
-      margin: margin,
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          child: Container(
-            width: width,
-            height: size,
-            child: Icon(icon, color: Colors.black),
+    return InkWell(
+      child: Container(
+        padding: EdgeInsets.only(
+          left: isCollapsed ? 0.0 : 10.0,
+        ),
+        decoration: BoxDecoration(
+          color: Color(0xffFAFAFA),
+          border: Border(
+            right: border,
+            bottom: border,
           ),
-          onTap: () {
-            final provider = Provider.of<MenuProvider>(context, listen: false);
-            provider.toggleIsCollapsed();
-          },
+        ),
+        width: 36.0,
+        height: 36.0,
+        child: Icon(
+          icon,
+          color: Colors.black,
         ),
       ),
+      onTap: () {
+        final provider = Provider.of<MenuProvider>(context, listen: false);
+        provider.toggleIsCollapsed();
+      },
     );
   }
 

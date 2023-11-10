@@ -14,7 +14,7 @@ class _MainDashboardState extends State<MainDashboard> {
         children: [
           Text(
             "Painel principal",
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.headlineLarge,
           ),
           SizedBox(
             height: 32.0,

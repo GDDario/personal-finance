@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/model/section.dart';
-import 'package:personal_finance/sections/main_dashboard.dart';
-import 'package:personal_finance/sections/transactions.dart';
+import 'package:personal_finance/sections/main_dashboard_section.dart';
+import 'package:personal_finance/sections/new_transaction_section.dart';
 
 final List<Section> sections = [
   Section(
     id: 1,
     name: "Painel principal",
     icon: Icons.dashboard,
-    widget: MainDashboard(),
+    widget: NewTransactionSection(),
   ),
   Section(
     id: 2,
     name: "Transações",
     icon: Icons.money,
-    widget: Transactions(),
+    widget: NewTransactionSection(),
   ),
   Section(
     id: 3,
