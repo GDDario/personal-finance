@@ -14,25 +14,11 @@ class Establishment {
       required this.createdAt,
       this.editedAt});
 
-  factory Establishment.fromJson(Map<String, dynamic> json) {
-    return Establishment(
-      id: json['id'],
-      name: json['name'],
-      type: EstablishmentType.fromJson(json['type']),
-      createdAt: DateTime.parse(json['createdAt']),
-      editedAt: json['editedAt'] != null
-          ? DateTime.parse(json['editedAt'])
-          : null,
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'type': type.toJson(),
-      'createdAt': createdAt.toIso8601String(),
-      'editedAt': editedAt?.toIso8601String(),
-    };
-  }
+  factory Establishment.fromDatabase(Map<String, dynamic> map) => Establishment(
+      id: map['id'] ?? 0,
+      name: map['name'] ?? '',
+      type: EstablishmentType(
+          id: map['establishment_type_id'],
+          name: map['establishment_type_name']),
+      createdAt: DateTime.parse(map['created_at']));
 }

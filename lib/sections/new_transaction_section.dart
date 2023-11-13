@@ -2,18 +2,14 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart' as intl;
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:personal_finance/enum/transaction_type.dart';
-import 'package:personal_finance/mock/mocked_establishments.dart';
 import 'package:personal_finance/mock/mocked_items.dart';
 import 'package:personal_finance/mock/mocked_payments.dart';
-import 'package:personal_finance/mock/mocked_products.dart';
 import 'package:personal_finance/model/establishment.dart';
 import 'package:personal_finance/model/item.dart';
 import 'package:personal_finance/model/payment.dart';
 import 'package:personal_finance/model/product.dart';
 import 'package:personal_finance/model/transaction.dart';
-import 'package:personal_finance/widget/dialog/base_dialog.dart';
 import 'package:personal_finance/widget/date_picker_text_field.dart';
 import 'package:personal_finance/widget/dialog/search_establishment_dialog.dart';
 import 'package:personal_finance/widget/dialog/search_products_dialog.dart';
@@ -46,7 +42,6 @@ class _NewTransactionSectionState extends State<NewTransactionSection> {
   void initState() {
     super.initState();
 
-    // transaction.items = mockedItems;
     getData();
     initializeDropdowns();
     initializeDateController();

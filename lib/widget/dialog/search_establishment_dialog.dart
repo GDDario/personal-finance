@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/database/dao/establishment_dao.dart';
 import 'package:personal_finance/mock/mocked_establishments.dart';
 import 'package:personal_finance/model/establishment.dart';
 import 'package:personal_finance/widget/dialog/base_dialog.dart';
@@ -15,13 +16,19 @@ class SearchEstablishmentDialog extends StatefulWidget {
 
 class _SearchEstablishmentDialogState extends State<SearchEstablishmentDialog> {
   late List<Establishment> establishments;
-  late List<Establishment> filteredEstablishments;
+  late List<Establishment> filteredEstablishments = [];
 
   @override
   void initState() {
+    getEstablishments();
     super.initState();
-    establishments = mockedEstablishments;
-    filteredEstablishments = establishments;
+  }
+
+  void getEstablishments() async {
+    establishments = await EstablishmentDAO().getAll();
+    setState(() {
+      filteredEstablishments = establishments;
+    });
   }
 
   @override
