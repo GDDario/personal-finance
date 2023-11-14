@@ -96,7 +96,7 @@ class DatabaseService {
     CREATE TABLE IF NOT EXISTS product_category(
       id INTEGER PRIMARY KEY,
       name VARCHAR(100) NOT NULL,
-      created_at DATETIME NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME
     );
     

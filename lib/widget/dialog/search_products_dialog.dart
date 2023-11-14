@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/database/dao/product_dao.dart';
 import 'package:personal_finance/mock/mocked_products.dart';
 import 'package:personal_finance/model/product.dart';
 import 'package:personal_finance/widget/dialog/base_dialog.dart';
@@ -14,13 +15,19 @@ class SearchProductsDialog extends StatefulWidget {
 
 class _SearchProductsDialogState extends State<SearchProductsDialog> {
   late List<Product> products;
-  late List<Product> filteredProducts;
+  late List<Product> filteredProducts = [];
 
   @override
   void initState() {
     super.initState();
-    products = mockedProducts;
-    filteredProducts = products;
+    getProducts();
+  }
+
+  void getProducts() async {
+    products = await ProductDAO().getAll();
+    setState(() {
+      filteredProducts = products;
+    });
   }
 
   @override
