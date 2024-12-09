@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:personal_finance/routing/routes.dart';
+import 'package:personal_finance/ui/core/ui/main_menu.dart';
 import 'package:personal_finance/ui/dashboard/widgets/dashboard_screen.dart';
 
 GoRouter router() => GoRouter(
@@ -8,12 +9,15 @@ GoRouter router() => GoRouter(
       routes: <RouteBase>[
         ShellRoute(
           builder: (context, state, child) {
-            return BottomNavigationBar(
-              backgroundColor: Colors.indigoAccent,
-                items: [
-              BottomNavigationBarItem(icon: Icon(Icons.abc), label: 'Abc'),
-              BottomNavigationBarItem(icon: Icon(Icons.zoom_in), label: 'Zoom in'),
-            ]);
+            return Scaffold(
+              // Menu on the left, content on the right
+              body: Row(
+                children: [
+                  const MainMenu(),
+                  Expanded(child: child),
+                ],
+              ),
+            );
           },
           routes: <RouteBase>[
             GoRoute(
