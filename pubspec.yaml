@@ -27,6 +27,8 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/img/personal-finance-full-logo-transparent.png
+    - assets/img/personal-finance-icon-transparent-logo.png
     - assets/img/personal-finance-high-resolution-logo-transparent.png
 
   fonts:
