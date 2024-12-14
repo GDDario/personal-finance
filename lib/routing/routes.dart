@@ -1,4 +1,4 @@
 sealed class Routes {
   static const String dashboard = '/dashboard';
-  static const String expenses = '/expenses';
+  static const String newExpense = '/new-expense';
 }

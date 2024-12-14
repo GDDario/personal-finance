@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-2import 'package:provider/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:personal_finance/ui/core/ui/main_menu/view_models/main_menu_viewmodel.dart';
 import 'package:personal_finance/routing/routes.dart';
 
@@ -18,9 +18,9 @@ class MenuItems extends StatelessWidget {
         ),
         SizedBox(height: 10),
         _MenuItem(
-          title: 'Expenses',
+          title: 'New expense',
           icon: Icons.money,
-          route: Routes.expenses,
+          route: Routes.newExpense,
         ),
       ],
     );
