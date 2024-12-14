@@ -33,7 +33,7 @@ GoRouter router() => GoRouter(
               ),
             ),
             GoRoute(
-              path: Routes.expenses,
+              path: Routes.newExpense,
               pageBuilder: (context, state) => buildPageWithAnimation(
                 state: state,
                 child: const ExpensesScreen(),
