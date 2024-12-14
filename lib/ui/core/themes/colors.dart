@@ -1,0 +1,31 @@
+import 'package:flutter/material.dart';
+
+sealed class AppColors {
+  static const Color blue1 = Color(0xFF1962ff);
+  static const Color white1 = Color(0xFFFFF7FA);
+  static const Color red1 = Color(0xFFdb1a1a);
+
+  static const lightColorScheme = ColorScheme(
+    brightness: Brightness.light,
+    primary: AppColors.blue1,
+    onPrimary: AppColors.white1,
+    secondary: AppColors.blue1,
+    onSecondary: AppColors.blue1,
+    error: Colors.white,
+    onError: AppColors.red1,
+    surface: AppColors.white1,
+    onSurface: AppColors.blue1,
+  );
+
+  static const darkColorScheme = ColorScheme(
+    brightness: Brightness.dark,
+    primary: AppColors.blue1,
+    onPrimary: AppColors.white1,
+    secondary: AppColors.blue1,
+    onSecondary: AppColors.blue1,
+    error: Colors.white,
+    onError: AppColors.red1,
+    surface: AppColors.white1,
+    onSurface: AppColors.blue1,
+  );
+}

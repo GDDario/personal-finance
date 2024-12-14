@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/ui/core/ui/default_metrics.dart';
+import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
