@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:personal_finance/ui/core/ui/main_menu/view_models/main_menu_viewmodel.dart';
 import 'package:personal_finance/routing/routes.dart';
+import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 
 class MenuItems extends StatelessWidget {
   const MenuItems({super.key});
@@ -42,27 +43,30 @@ class _MenuItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final expanded = context.watch<MainMenuViewModel>().expanded;
     final isSelected = GoRouterState.of(context).uri.toString() == route;
-    final textColor = isSelected ? Colors.blue : Colors.white;
-    final bgColor = isSelected ? Colors.white : Colors.transparent;
+    final textColor = isSelected
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimary;
+    final bgColor = isSelected
+        ? Theme.of(context).colorScheme.onPrimary
+        : Colors.transparent;
 
     return Material(
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(8),
-        ),
+        borderRadius: DefaultMetrics.roundedBorderRadius,
       ),
       color: bgColor,
       child: InkWell(
+        borderRadius: DefaultMetrics.roundedBorderRadius,
         onTap: () => context.go(route),
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
               Icon(icon, color: textColor),
               if (expanded)
                 Row(
                   children: [
-                    SizedBox(width: 15.0),
+                    const SizedBox(width: 15.0),
                     Text(
                       title,
                       style: TextStyle(

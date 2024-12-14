@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/ui/core/themes/theme.dart';
 import 'routing/router.dart';
 
 void main() {
@@ -12,11 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        fontFamily: 'Inter',
-      ),
+      theme: AppTheme.lightTheme,
       routerConfig: router(),
     );
   }

@@ -10,15 +10,10 @@ sealed class AppTheme {
   );
 
   static ThemeData lightTheme = ThemeData(
-      useMaterial3: true,
-      brightness: Brightness.light,
-      colorScheme: AppColors.lightColorScheme,
-      textTheme: _textTheme);
-
-  static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
-    brightness: Brightness.dark,
-    colorScheme: AppColors.darkColorScheme,
+    brightness: Brightness.light,
+    colorScheme: AppColors.lightColorScheme,
     textTheme: _textTheme,
+    fontFamily: 'Inter',
   );
 }

@@ -10,22 +10,10 @@ sealed class AppColors {
     primary: AppColors.blue1,
     onPrimary: AppColors.white1,
     secondary: AppColors.blue1,
-    onSecondary: AppColors.blue1,
+    onSecondary: AppColors.white1,
     error: Colors.white,
     onError: AppColors.red1,
     surface: AppColors.white1,
-    onSurface: AppColors.blue1,
-  );
-
-  static const darkColorScheme = ColorScheme(
-    brightness: Brightness.dark,
-    primary: AppColors.blue1,
-    onPrimary: AppColors.white1,
-    secondary: AppColors.blue1,
-    onSecondary: AppColors.blue1,
-    error: Colors.white,
-    onError: AppColors.red1,
-    surface: AppColors.white1,
-    onSurface: AppColors.blue1,
+    onSurface: Colors.black,
   );
 }

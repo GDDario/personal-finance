@@ -27,7 +27,7 @@ class MainMenu extends StatelessWidget {
     }
 
     return Container(
-      color: Colors.blue,
+      color: Theme.of(context).colorScheme.primary,
       child: AnimatedSize(
         duration: const Duration(milliseconds: 200),
         curve: Curves.linear,
@@ -40,13 +40,13 @@ class MainMenu extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.menu,
                     color: Colors.white,
                   ),
                   onPressed: viewModel.toggleExpanded,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,8 +54,8 @@ class MainMenu extends StatelessWidget {
                     Expanded(child: imageAsset()),
                   ],
                 ),
-                SizedBox(height: 40),
-                Expanded(child: MenuItems()),
+                const SizedBox(height: 40),
+                const Expanded(child: MenuItems()),
               ],
             ),
           ),
