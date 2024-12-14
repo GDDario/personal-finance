@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+2import 'package:provider/provider.dart';
+import 'package:personal_finance/ui/core/ui/main_menu/view_models/main_menu_viewmodel.dart';
 import 'package:personal_finance/routing/routes.dart';
 
 class MenuItems extends StatelessWidget {
@@ -7,22 +9,18 @@ class MenuItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedRoute = GoRouterState.of(context).uri.toString();
-
-    return Column(
-      children: <Widget>[
+    return ListView(
+      children: const [
         _MenuItem(
           title: 'Dashboard',
           icon: Icons.dashboard,
           route: Routes.dashboard,
-          selected: selectedRoute == Routes.dashboard,
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 10),
         _MenuItem(
           title: 'Expenses',
           icon: Icons.money,
           route: Routes.expenses,
-          selected: selectedRoute == Routes.expenses,
         ),
       ],
     );
@@ -33,20 +31,19 @@ class _MenuItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final String route;
-  final bool selected;
 
   const _MenuItem({
-    super.key,
     required this.title,
     required this.icon,
     required this.route,
-    required this.selected,
   });
 
   @override
   Widget build(BuildContext context) {
-    var textColor = selected ? Colors.blue : Colors.white;
-    var bgColor = selected ? Colors.white : Colors.transparent;
+    final expanded = context.watch<MainMenuViewModel>().expanded;
+    final isSelected = GoRouterState.of(context).uri.toString() == route;
+    final textColor = isSelected ? Colors.blue : Colors.white;
+    final bgColor = isSelected ? Colors.white : Colors.transparent;
 
     return Material(
       shape: const RoundedRectangleBorder(
@@ -55,15 +52,27 @@ class _MenuItem extends StatelessWidget {
         ),
       ),
       color: bgColor,
-      child: ListTile(
+      child: InkWell(
         onTap: () => context.go(route),
-        textColor: textColor,
-        iconColor: textColor,
-        leading: Icon(icon),
-        title: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 14,
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Icon(icon, color: textColor),
+              if (expanded)
+                Row(
+                  children: [
+                    SizedBox(width: 15.0),
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: textColor,
+                      ),
+                    ),
+                  ],
+                )
+            ],
           ),
         ),
       ),
