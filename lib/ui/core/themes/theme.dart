@@ -4,7 +4,7 @@ import 'package:personal_finance/ui/core/themes/colors.dart';
 sealed class AppTheme {
   static const _textTheme = TextTheme(
     headlineLarge: TextStyle(
-      fontSize: 32,
+      fontSize: 22,
       fontWeight: FontWeight.w500,
     ),
   );
