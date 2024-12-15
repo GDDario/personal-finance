@@ -31,7 +31,7 @@ class MainMenu extends StatelessWidget {
       color: Theme.of(context).colorScheme.primary,
       child: AnimatedSize(
         duration: const Duration(milliseconds: 200),
-        curve: Curves.linear,
+        curve: Curves.ease,
         alignment: Alignment.centerLeft,
         child: SizedBox(
           width: viewModel.expanded ? 250 : 85,
