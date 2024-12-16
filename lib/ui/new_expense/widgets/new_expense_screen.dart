@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
+import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
-  const NewExpenseScreen({super.key});
+  final NewExpenseViewModel viewModel;
+  const NewExpenseScreen({super.key, required this.viewModel});
 
   @override
   State<NewExpenseScreen> createState() => _NewExpenseScreenState();
 }
 
 class _NewExpenseScreenState extends State<NewExpenseScreen> {
+  late List<DropdownMenuEntry> items;
+
+  @override
+  void initState() {
+    items = widget.viewModel.menuItems;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +33,14 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
               "New expense",
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             DropdownMenu(
-              label: Text('Payment method'),
+              label: const Text('Payment method'),
               width: 220,
-              dropdownMenuEntries: [],
+              initialSelection: items.first.value,
+              dropdownMenuEntries: items,
               onSelected: (_) {},
             ),
           ],
