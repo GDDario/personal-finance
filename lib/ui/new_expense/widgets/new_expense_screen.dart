@@ -40,7 +40,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
               height: 40,
             ),
             Row(
-              spacing: 40,
+              spacing: 15,
               children: <Widget>[
                 DropdownMenu(
                   label: const Text('Payment method'),
@@ -50,7 +50,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                   dropdownMenuEntries: items,
                   onSelected: (_) {},
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 220,
                   child: TextField(
                   ),
