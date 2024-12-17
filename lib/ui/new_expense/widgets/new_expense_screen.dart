@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
-import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
