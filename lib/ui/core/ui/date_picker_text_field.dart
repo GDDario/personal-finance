@@ -17,7 +17,6 @@ class DatePickerTextField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       inputFormatters: [MaskTextInputFormatter(mask: "####-##-##")],
-      style: const TextStyle(fontSize: 14.0),
       decoration: InputDecoration(
         // hintStyle: const TextStyle(color: Colors.black45),
         // errorStyle: const TextStyle(color: Colors.redAccent),
@@ -25,7 +24,7 @@ class DatePickerTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(4)
         ),
         suffixIcon: Padding(
-          padding: const EdgeInsets.only(right: 6.0),
+          padding: const EdgeInsets.only(right: 4.0),
           child: IconButton(
             onPressed: () {
               showDatePicker(
