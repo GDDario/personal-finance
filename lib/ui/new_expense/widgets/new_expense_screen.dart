@@ -48,9 +48,10 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                   initialSelection: items.first.value,
                   inputDecorationTheme: Theme.of(context).inputDecorationTheme,
                   dropdownMenuEntries: items,
+                  alignmentOffset: Offset(250, 0),
                   onSelected: (_) {},
                 ),
-                 SizedBox(
+                SizedBox(
                   width: 220,
                   child: SearchTextField(
                     controller: establishmentController,
