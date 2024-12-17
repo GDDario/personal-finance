@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
+import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
+
   const NewExpenseScreen({super.key, required this.viewModel});
 
   @override
@@ -14,6 +16,7 @@ class NewExpenseScreen extends StatefulWidget {
 
 class _NewExpenseScreenState extends State<NewExpenseScreen> {
   late List<DropdownMenuEntry> items;
+  TextEditingController dateController = TextEditingController();
 
   @override
   void initState() {
@@ -36,12 +39,30 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
             const SizedBox(
               height: 40,
             ),
-            DropdownMenu(
-              label: const Text('Payment method'),
-              width: 220,
-              initialSelection: items.first.value,
-              dropdownMenuEntries: items,
-              onSelected: (_) {},
+            Row(
+              spacing: 40,
+              children: <Widget>[
+                DropdownMenu(
+                  label: const Text('Payment method'),
+                  width: 220,
+                  initialSelection: items.first.value,
+                  inputDecorationTheme: Theme.of(context).inputDecorationTheme,
+                  dropdownMenuEntries: items,
+                  onSelected: (_) {},
+                ),
+                SizedBox(
+                  width: 220,
+                  child: TextField(
+                  ),
+                ),
+                SizedBox(
+                  width: 220,
+                  child: DatePickerTextField(
+                    controller: dateController,
+                    labelText: 'Date',
+                  ),
+                ),
+              ],
             ),
           ],
         ),
