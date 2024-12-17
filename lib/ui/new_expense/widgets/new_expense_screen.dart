@@ -3,6 +3,7 @@ import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
+import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
@@ -39,33 +40,41 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
             const SizedBox(
               height: 40,
             ),
-            Row(
-              spacing: 15,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 20,
               children: <Widget>[
-                DropdownMenu(
-                  label: const Text('Payment method'),
-                  width: 220,
-                  initialSelection: items.first.value,
-                  inputDecorationTheme: Theme.of(context).inputDecorationTheme,
-                  dropdownMenuEntries: items,
-                  alignmentOffset: Offset(250, 0),
-                  onSelected: (_) {},
+                Row(
+                  spacing: 15,
+                  children: <Widget>[
+                    DropdownMenu(
+                      label: const Text('Payment method'),
+                      width: 220,
+                      initialSelection: items.first.value,
+                      inputDecorationTheme:
+                          Theme.of(context).inputDecorationTheme,
+                      dropdownMenuEntries: items,
+                      alignmentOffset: const Offset(250, 0),
+                      onSelected: (_) {},
+                    ),
+                    SizedBox(
+                      width: 220,
+                      child: SearchTextField(
+                        controller: establishmentController,
+                        label: 'Establishment',
+                        onIconPressed: () {},
+                      ),
+                    ),
+                    SizedBox(
+                      width: 220,
+                      child: DatePickerTextField(
+                        controller: dateController,
+                        labelText: 'Date',
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  width: 220,
-                  child: SearchTextField(
-                    controller: establishmentController,
-                    label: 'Establishment',
-                    onIconPressed: () {},
-                  ),
-                ),
-                SizedBox(
-                  width: 220,
-                  child: DatePickerTextField(
-                    controller: dateController,
-                    labelText: 'Date',
-                  ),
-                ),
+                ItemsTable()
               ],
             ),
           ],

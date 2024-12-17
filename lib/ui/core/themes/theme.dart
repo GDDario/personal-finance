@@ -23,7 +23,6 @@ sealed class AppTheme {
       borderRadius:
           BorderRadius.all(Radius.circular(DefaultMetrics.borderRadius)),
     ),
-
   );
 
   static ThemeData lightTheme = ThemeData(
