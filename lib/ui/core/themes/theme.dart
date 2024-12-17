@@ -18,11 +18,20 @@ sealed class AppTheme {
     ),
   );
 
+  static const DatePickerThemeData _datePickerTheme = DatePickerThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius:
+          BorderRadius.all(Radius.circular(DefaultMetrics.borderRadius)),
+    ),
+
+  );
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
     inputDecorationTheme: _inputDecorationTheme,
+    datePickerTheme: _datePickerTheme,
     textTheme: _textTheme,
     fontFamily: 'Inter',
   );
