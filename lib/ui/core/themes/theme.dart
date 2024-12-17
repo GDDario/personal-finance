@@ -25,12 +25,19 @@ sealed class AppTheme {
     ),
   );
 
+  static final DataTableThemeData _dataTableTheme = DataTableThemeData(
+      decoration: BoxDecoration(
+        border: Border.all(),
+    borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
+  ));
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: AppColors.lightColorScheme,
     inputDecorationTheme: _inputDecorationTheme,
     datePickerTheme: _datePickerTheme,
+    dataTableTheme: _dataTableTheme,
     textTheme: _textTheme,
     fontFamily: 'Inter',
   );
