@@ -31,6 +31,19 @@ sealed class AppTheme {
     borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
   ));
 
+  static final ElevatedButtonThemeData _elevatedButtonTheme = ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(AppColors.blue1),
+        foregroundColor: WidgetStatePropertyAll(Colors.white), // Define a cor branca para o texto
+        overlayColor: WidgetStatePropertyAll(Colors.white.withAlpha(30)), // Define o ripple effect
+        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
+        )),
+        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
+        elevation: WidgetStatePropertyAll(3)
+      ),
+  );
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
@@ -38,6 +51,7 @@ sealed class AppTheme {
     inputDecorationTheme: _inputDecorationTheme,
     datePickerTheme: _datePickerTheme,
     dataTableTheme: _dataTableTheme,
+    elevatedButtonTheme: _elevatedButtonTheme,
     textTheme: _textTheme,
     fontFamily: 'Inter',
   );
