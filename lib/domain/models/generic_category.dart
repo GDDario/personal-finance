@@ -5,4 +5,6 @@ class GenericCategory {
   late DateTime? updatedAt;
 
   GenericCategory();
+
+  GenericCategory.simple(this.id, this.name);
 }
