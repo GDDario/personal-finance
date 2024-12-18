@@ -1,20 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/material.dart';
 
 class ItemsTable extends StatelessWidget {
-  const ItemsTable({super.key});
+  final List<DataRow> rows;
+
+  const ItemsTable({super.key, required this.rows});
 
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 800),
-      child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius:
-                BorderRadius.circular(DefaultMetrics.fieldBorderRadius),
-          ),
+      child: SizedBox(
           height: 365,
           child: DataTable2(
             sortAscending: false,
@@ -31,7 +27,7 @@ class ItemsTable extends StatelessWidget {
               DataColumn(label: Text("Quantity")),
               DataColumn(label: Text("Total")),
             ],
-            rows: <DataRow>[],
+            rows: rows,
           )),
     );
   }

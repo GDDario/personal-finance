@@ -15,13 +15,11 @@ class NewExpenseScreen extends StatefulWidget {
 }
 
 class _NewExpenseScreenState extends State<NewExpenseScreen> {
-  late List<DropdownMenuEntry> items;
   final TextEditingController dateController = TextEditingController();
   final TextEditingController establishmentController = TextEditingController();
 
   @override
   void initState() {
-    items = widget.viewModel.menuItems;
     super.initState();
   }
 
@@ -50,10 +48,10 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     DropdownMenu(
                       label: const Text('Payment method'),
                       width: 220,
-                      initialSelection: items.first.value,
+                      initialSelection: widget.viewModel.menuItems.first.value,
                       inputDecorationTheme:
                           Theme.of(context).inputDecorationTheme,
-                      dropdownMenuEntries: items,
+                      dropdownMenuEntries: widget.viewModel.menuItems,
                       alignmentOffset: const Offset(250, 0),
                       onSelected: (_) {},
                     ),
@@ -74,7 +72,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     ),
                   ],
                 ),
-                ItemsTable()
+                ItemsTable(
+                  rows: widget.viewModel.tableItems,
+                ),
               ],
             ),
           ],
