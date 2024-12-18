@@ -33,14 +33,14 @@ sealed class AppTheme {
 
   static final ElevatedButtonThemeData _elevatedButtonTheme = ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStatePropertyAll(AppColors.blue1),
-        foregroundColor: WidgetStatePropertyAll(Colors.white), // Define a cor branca para o texto
-        overlayColor: WidgetStatePropertyAll(Colors.white.withAlpha(30)), // Define o ripple effect
+        backgroundColor: const WidgetStatePropertyAll(AppColors.blue1),
+        foregroundColor: const WidgetStatePropertyAll(Colors.white),
+        overlayColor: WidgetStatePropertyAll(Colors.white.withAlpha(30)),
         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
         )),
-        padding: WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
-        elevation: WidgetStatePropertyAll(3)
+        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
+        elevation: const WidgetStatePropertyAll(3)
       ),
   );
 
