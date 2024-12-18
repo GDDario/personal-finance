@@ -72,6 +72,19 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     ),
                   ],
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    print('Adding a button');
+                  },
+                  child: const Row(
+                    spacing: 10,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text('Add item'),
+                      Icon(Icons.add, color: Colors.white,)
+                    ],
+                  ),
+                ),
                 ItemsTable(
                   rows: widget.viewModel.tableItems,
                 ),

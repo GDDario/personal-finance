@@ -60,30 +60,6 @@ class NewExpenseViewModel extends ChangeNotifier {
       DataCell(Text(1.toString())),
       DataCell(Text(products[3].price.toStringAsFixed(2))),
     ]),
-    DataRow(cells: [
-      DataCell(Text(products[3].id.toString())),
-      DataCell(Text(products[3].name)),
-      DataCell(Text(products[3].category.name)),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-      DataCell(Text(1.toString())),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-    ]),
-    DataRow(cells: [
-      DataCell(Text(products[3].id.toString())),
-      DataCell(Text(products[3].name)),
-      DataCell(Text(products[3].category.name)),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-      DataCell(Text(1.toString())),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-    ]),
-    DataRow(cells: [
-      DataCell(Text(products[3].id.toString())),
-      DataCell(Text(products[3].name)),
-      DataCell(Text(products[3].category.name)),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-      DataCell(Text(1.toString())),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
-    ]),
   ];
 
   void addDataRow() {}
