@@ -17,7 +17,7 @@ class MenuItems extends StatelessWidget {
           icon: Icons.dashboard,
           route: Routes.dashboard,
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 5),
         _MenuItem(
           title: 'New expense',
           icon: Icons.money,
