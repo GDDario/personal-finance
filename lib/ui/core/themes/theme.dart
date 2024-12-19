@@ -27,21 +27,21 @@ sealed class AppTheme {
 
   static final DataTableThemeData _dataTableTheme = DataTableThemeData(
       decoration: BoxDecoration(
-        border: Border.all(),
+    border: Border.all(),
     borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
   ));
 
-  static final ElevatedButtonThemeData _elevatedButtonTheme = ElevatedButtonThemeData(
-      style: ButtonStyle(
+  static final ElevatedButtonThemeData _elevatedButtonTheme =
+      ElevatedButtonThemeData(
+    style: ButtonStyle(
         backgroundColor: const WidgetStatePropertyAll(AppColors.blue1),
         foregroundColor: const WidgetStatePropertyAll(Colors.white),
         overlayColor: WidgetStatePropertyAll(Colors.white.withAlpha(30)),
         shape: WidgetStatePropertyAll(RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
         )),
-        padding: const WidgetStatePropertyAll(EdgeInsets.symmetric(vertical: 20, horizontal: 20)),
-        elevation: const WidgetStatePropertyAll(3)
-      ),
+        padding: const WidgetStatePropertyAll(EdgeInsets.all(20)),
+        elevation: const WidgetStatePropertyAll(3)),
   );
 
   static ThemeData lightTheme = ThemeData(

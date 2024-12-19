@@ -15,8 +15,10 @@ class NewExpenseScreen extends StatefulWidget {
 }
 
 class _NewExpenseScreenState extends State<NewExpenseScreen> {
-  final TextEditingController dateController = TextEditingController();
-  final TextEditingController establishmentController = TextEditingController();
+  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _establishmentController =
+      TextEditingController();
+  final TextEditingController _itemController = TextEditingController();
 
   @override
   void initState() {
@@ -58,7 +60,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     SizedBox(
                       width: 220,
                       child: SearchTextField(
-                        controller: establishmentController,
+                        controller: _establishmentController,
                         label: 'Establishment',
                         onIconPressed: () {},
                       ),
@@ -66,24 +68,40 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     SizedBox(
                       width: 220,
                       child: DatePickerTextField(
-                        controller: dateController,
+                        controller: _dateController,
                         labelText: 'Date',
                       ),
                     ),
                   ],
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    print('Adding a button');
-                  },
-                  child: const Row(
-                    spacing: 10,
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text('Add item'),
-                      Icon(Icons.add, color: Colors.white,)
-                    ],
-                  ),
+                Row(
+                  spacing: 15,
+                  children: <Widget>[
+                    SizedBox(
+                      width: 220,
+                      child: SearchTextField(
+                        controller: _itemController,
+                        label: 'Search for an item',
+                        onIconPressed: () {},
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        print('Adding a button');
+                      },
+                      child: const Row(
+                        spacing: 10,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Add item'),
+                          Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 ItemsTable(
                   rows: widget.viewModel.tableItems,
