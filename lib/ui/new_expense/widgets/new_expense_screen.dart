@@ -3,6 +3,7 @@ import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
+import 'package:personal_finance/ui/new_expense/widgets/adjustment_items.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 
 class NewExpenseScreen extends StatefulWidget {
@@ -101,19 +102,12 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                 ItemsTable(
                   rows: widget.viewModel.tableItems,
                 ),
-                Row(spacing: 15, children: <Widget>[
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: ElevatedButton.icon(
-                      onPressed: () {},
-                      label: const Text('Add discount/addition'),
-                      icon: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ]),
+                Row(
+                  spacing: 15,
+                  children: <Widget>[
+                    AdjustmentItems()
+                  ],
+                ),
               ],
             ),
           ],
