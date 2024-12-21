@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/data/mock/adjustment_mock.dart';
 import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/data/mock/products_mock.dart';
+import 'package:personal_finance/domain/models/addition.dart';
+import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/generic_item.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
@@ -62,5 +65,15 @@ class NewExpenseViewModel extends ChangeNotifier {
     ]),
   ];
 
+  List<Adjustment> adjustments = adjustmentsMock;
+
   void addDataRow() {}
+
+  void addAdjustment(Adjustment adjustment) {
+    if (Adjustment is Addition) {
+
+    } else {
+
+    }
+  }
 }

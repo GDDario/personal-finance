@@ -105,7 +105,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                 Row(
                   spacing: 15,
                   children: <Widget>[
-                    AdjustmentItems()
+                    AdjustmentItems(viewModel: widget.viewModel)
                   ],
                 ),
               ],
