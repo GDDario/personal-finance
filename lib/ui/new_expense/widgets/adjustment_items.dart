@@ -17,7 +17,8 @@ class AdjustmentItems extends StatefulWidget {
 }
 
 class _AdjustmentItemsState extends State<AdjustmentItems> {
-  List<Widget> items = [];
+  List<Widget> adjustmentModalItems = [];
+  List<Widget> formFields = [];
 
   @override
   void initState() {
@@ -41,6 +42,7 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
             ),
           ),
         ),
+        ...formFields
       ],
     );
   }
@@ -48,7 +50,7 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
   void _openAdjustmentOptionsDialog() {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (BuildContext dialogContext) { // Captura o contexto do diálogo
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
@@ -66,7 +68,21 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
               width: 400,
               child: SingleChildScrollView(
                 child: Column(
-                  children: items,
+                  children: adjustmentModalItems.map((item) {
+                    if (item is ListTile) {
+                      return ListTile(
+                        title: item.title,
+                        trailing: item.trailing,
+                        onTap: () {
+                          Navigator.of(dialogContext).pop();
+                          if (item.onTap != null) {
+                            item.onTap!();
+                          }
+                        },
+                      );
+                    }
+                    return item;
+                  }).toList(),
                 ),
               ),
             ),
@@ -77,41 +93,59 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
               children: <Widget>[
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Navigator.of(dialogContext).pop();
                   },
                   child: const Text('Close'),
                 ),
               ],
-            )
+            ),
           ],
         );
       },
     );
   }
-
   void _initiateItems() {
     int lastIndex = widget.viewModel.adjustments.length - 1;
 
     for (int i = 0; i < widget.viewModel.adjustments.length; i++) {
       Adjustment adjustment = widget.viewModel.adjustments[i];
 
-      items.add(ListTile(
+      adjustmentModalItems.add(ListTile(
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(adjustment.typeString(), style: const TextStyle(fontSize: 12)),
+            Text(
+              adjustment.typeString(),
+              style: const TextStyle(
+                fontSize: 12,
+              ),
+            ),
             Text(adjustment.name)
           ],
         ),
         trailing: const Icon(Icons.add),
-        onTap: () {},
+        onTap: () => _addFormField(adjustment),
       ));
 
       if (i != lastIndex) {
-        items.add(const Divider(
+        adjustmentModalItems.add(const Divider(
           color: AppColors.grey1,
         ));
       }
     }
+  }
+
+  void _addFormField(Adjustment adjustment) {
+    Widget formField = SizedBox(
+      width: 220,
+      child: TextFormField(
+        decoration: InputDecoration(
+            label: Text("${adjustment.name} (${adjustment.typeString()})")),
+      ),
+    );
+
+    setState(() {
+      formFields.add(formField);
+    });
   }
 }
