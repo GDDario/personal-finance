@@ -44,6 +44,14 @@ sealed class AppTheme {
         elevation: const WidgetStatePropertyAll(3)),
   );
 
+  static final ListTileThemeData _listTileTheme = ListTileThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(
+        DefaultMetrics.borderRadius,
+      ),
+    ),
+  );
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
@@ -52,6 +60,7 @@ sealed class AppTheme {
     datePickerTheme: _datePickerTheme,
     dataTableTheme: _dataTableTheme,
     elevatedButtonTheme: _elevatedButtonTheme,
+    listTileTheme: _listTileTheme,
     textTheme: _textTheme,
     fontFamily: 'Inter',
   );
