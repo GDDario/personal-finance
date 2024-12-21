@@ -50,7 +50,7 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
   void _openAdjustmentOptionsDialog() {
     showDialog(
       context: context,
-      builder: (BuildContext dialogContext) { // Captura o contexto do diálogo
+      builder: (BuildContext dialogContext) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
@@ -104,6 +104,7 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
       },
     );
   }
+
   void _initiateItems() {
     int lastIndex = widget.viewModel.adjustments.length - 1;
 
@@ -136,16 +137,33 @@ class _AdjustmentItemsState extends State<AdjustmentItems> {
   }
 
   void _addFormField(Adjustment adjustment) {
+    final GlobalKey formKey = GlobalKey();
+
     Widget formField = SizedBox(
+      key: formKey,
       width: 220,
       child: TextFormField(
         decoration: InputDecoration(
-            label: Text("${adjustment.name} (${adjustment.typeString()})")),
+          label: Text("${adjustment.name} (${adjustment.typeString()})"),
+          suffixIcon: Padding(
+            padding: const EdgeInsets.only(right: 4.0),
+            child: IconButton(
+              onPressed: () => _removeFormField(formKey),
+              icon: const Icon(Icons.close),
+            ),
+          ),
+        ),
       ),
     );
 
     setState(() {
       formFields.add(formField);
+    });
+  }
+
+  void _removeFormField(GlobalKey formKey) {
+    setState(() {
+      formFields.removeWhere((field) => field.key == formKey);
     });
   }
 }

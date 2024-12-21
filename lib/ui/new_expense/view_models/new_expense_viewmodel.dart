@@ -4,10 +4,9 @@ import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/data/mock/products_mock.dart';
 import 'package:personal_finance/domain/models/addition.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
-import 'package:personal_finance/domain/models/generic_item.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
-  final List<DropdownMenuEntry> menuItems = [
+  final List<DropdownMenuEntry<int>> menuItems = [
     DropdownMenuEntry(
       value: paymentMethodsMock[0].id,
       label: paymentMethodsMock[0].name,
@@ -68,12 +67,4 @@ class NewExpenseViewModel extends ChangeNotifier {
   List<Adjustment> adjustments = adjustmentsMock;
 
   void addDataRow() {}
-
-  void addAdjustment(Adjustment adjustment) {
-    if (Adjustment is Addition) {
-
-    } else {
-
-    }
-  }
 }

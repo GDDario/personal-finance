@@ -29,88 +29,112 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(DefaultMetrics.screenPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              "New expense",
-              style: Theme.of(context).textTheme.headlineLarge,
-            ),
-            const SizedBox(
-              height: 40,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 20,
-              children: <Widget>[
-                Row(
-                  spacing: 15,
-                  children: <Widget>[
-                    DropdownMenu(
-                      label: const Text('Payment method'),
-                      width: 220,
-                      initialSelection: widget.viewModel.menuItems.first.value,
-                      inputDecorationTheme:
-                          Theme.of(context).inputDecorationTheme,
-                      dropdownMenuEntries: widget.viewModel.menuItems,
-                      alignmentOffset: const Offset(250, 0),
-                      onSelected: (_) {},
-                    ),
-                    SizedBox(
-                      width: 220,
-                      child: SearchTextField(
-                        controller: _establishmentController,
-                        label: 'Establishment',
-                        onIconPressed: () {},
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(DefaultMetrics.screenPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                "New expense",
+                style: Theme.of(context).textTheme.headlineLarge,
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 20,
+                children: <Widget>[
+                  Row(
+                    spacing: 15,
+                    children: <Widget>[
+                      DropdownMenu(
+                        label: const Text('Payment method'),
+                        width: 220,
+                        initialSelection:
+                            widget.viewModel.menuItems.first.value,
+                        inputDecorationTheme:
+                            Theme.of(context).inputDecorationTheme,
+                        dropdownMenuEntries: widget.viewModel.menuItems,
+                        alignmentOffset: const Offset(250, 0),
+                        onSelected: (_) {},
                       ),
-                    ),
-                    SizedBox(
-                      width: 220,
-                      child: DatePickerTextField(
-                        controller: _dateController,
-                        labelText: 'Date',
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  spacing: 15,
-                  children: <Widget>[
-                    SizedBox(
-                      width: 220,
-                      child: SearchTextField(
-                        controller: _itemController,
-                        label: 'Search for an item',
-                        onIconPressed: () {},
-                      ),
-                    ),
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: ElevatedButton.icon(
-                        onPressed: () {},
-                        label: const Text('Add item'),
-                        icon: const Icon(
-                          Icons.add,
-                          color: Colors.white,
+                      SizedBox(
+                        width: 220,
+                        child: SearchTextField(
+                          controller: _establishmentController,
+                          label: 'Establishment',
+                          onIconPressed: () {},
                         ),
                       ),
-                    )
-                  ],
-                ),
-                ItemsTable(
-                  rows: widget.viewModel.tableItems,
-                ),
-                Row(
-                  spacing: 15,
-                  children: <Widget>[
-                    AdjustmentItems(viewModel: widget.viewModel)
-                  ],
-                ),
-              ],
-            ),
-          ],
+                      SizedBox(
+                        width: 220,
+                        child: DatePickerTextField(
+                          controller: _dateController,
+                          labelText: 'Date',
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    spacing: 15,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 220,
+                        child: SearchTextField(
+                          controller: _itemController,
+                          label: 'Search for an item',
+                          onIconPressed: () {},
+                        ),
+                      ),
+                      Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: ElevatedButton.icon(
+                          onPressed: () {},
+                          label: const Text('Add item'),
+                          icon: const Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  ItemsTable(
+                    rows: widget.viewModel.tableItems,
+                  ),
+                  Row(
+                    spacing: 15,
+                    children: <Widget>[
+                      AdjustmentItems(viewModel: widget.viewModel)
+                    ],
+                  ),
+                  Row(
+                    spacing: 15,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Row(
+                            children: [
+                              Text('Finish'),
+                              Spacer(),
+                              Icon(
+                                Icons.check_circle_outline,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
