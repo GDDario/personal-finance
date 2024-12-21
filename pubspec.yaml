@@ -19,6 +19,7 @@ dependencies:
   intl: ^0.20.1
   data_table_2: ^2.5.18
   package_info_plus: ^8.1.2
+  file_picker: ^8.1.6
 
 dev_dependencies:
   flutter_test:
