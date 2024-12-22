@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personal_finance/ui/core/themes/colors.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
@@ -111,8 +112,35 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 15,
                     children: <Widget>[
+                      SizedBox(
+                        width: 180,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 10,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.purple1,
+                              ),
+                              onPressed: () {},
+                              child: const Row(
+                                children: [
+                                  Text('Add attachments'),
+                                  Spacer(),
+                                  Icon(
+                                    Icons.attach_file,
+                                    color: Colors.white,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Text('ooi'),
+                          ],
+                        ),
+                      ),
                       SizedBox(
                         width: 150,
                         child: ElevatedButton(
