@@ -50,6 +50,19 @@ class _MainMenuState extends State<MainMenu> {
             );
     }
 
+    Widget appVersion() {
+      return viewModel.expanded
+          ? Text(
+              "Version $version",
+              style: const TextStyle(color: Colors.white),
+              textAlign: TextAlign.end,
+            )
+          : Tooltip(
+              message: "Version: $version",
+              child: const Icon(Icons.info, color: Colors.white),
+            );
+    }
+
     return Container(
       color: Theme.of(context).colorScheme.primary,
       child: AnimatedSize(
@@ -83,12 +96,8 @@ class _MainMenuState extends State<MainMenu> {
                 const Spacer(),
                 SettingsButton(),
                 Padding(
-                  padding: EdgeInsets.only(right: 10, left: 10, top: 10),
-                  child: Text(
-                    "Version ${version}",
-                    style: TextStyle(color: Colors.white),
-                    textAlign: TextAlign.end,
-                  ),
+                  padding: const EdgeInsets.only(right: 10, left: 10, top: 10),
+                  child: appVersion(),
                 )
               ],
             ),
