@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:personal_finance/data/mock/adjustment_mock.dart';
 import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/data/mock/products_mock.dart';
-import 'package:personal_finance/domain/models/addition.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
+import 'package:personal_finance/domain/models/attachment.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
   final List<DropdownMenuEntry<int>> menuItems = [
@@ -28,7 +28,6 @@ class NewExpenseViewModel extends ChangeNotifier {
       label: paymentMethodsMock[4].name,
     ),
   ];
-
   List<DataRow> tableItems = [
     DataRow(cells: [
       DataCell(Text(products.first.id.toString())),
@@ -63,8 +62,8 @@ class NewExpenseViewModel extends ChangeNotifier {
       DataCell(Text(products[3].price.toStringAsFixed(2))),
     ]),
   ];
-
   List<Adjustment> adjustments = adjustmentsMock;
+  List<Attachment> attachments = [];
 
   void addDataRow() {}
 }

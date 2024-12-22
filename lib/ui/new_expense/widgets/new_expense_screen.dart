@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/ui/core/themes/colors.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
-import 'package:personal_finance/ui/new_expense/widgets/adjustment_items.dart';
+import 'package:personal_finance/ui/new_expense/widgets/adjustments.dart';
+import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 
 class NewExpenseScreen extends StatefulWidget {
@@ -108,39 +108,14 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                   Row(
                     spacing: 15,
                     children: <Widget>[
-                      AdjustmentItems(viewModel: widget.viewModel)
+                      Adjustments(viewModel: widget.viewModel)
                     ],
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     spacing: 15,
                     children: <Widget>[
-                      SizedBox(
-                        width: 180,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          spacing: 10,
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.purple1,
-                              ),
-                              onPressed: () {},
-                              child: const Row(
-                                children: [
-                                  Text('Add attachments'),
-                                  Spacer(),
-                                  Icon(
-                                    Icons.attach_file,
-                                    color: Colors.white,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Text('ooi'),
-                          ],
-                        ),
-                      ),
+                      Attachments(viewModel: widget.viewModel),
                       SizedBox(
                         width: 150,
                         child: ElevatedButton(

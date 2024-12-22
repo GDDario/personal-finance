@@ -4,19 +4,19 @@ import 'package:personal_finance/ui/core/themes/colors.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 
-class AdjustmentItems extends StatefulWidget {
+class Adjustments extends StatefulWidget {
   final NewExpenseViewModel viewModel;
 
-  const AdjustmentItems({
+  const Adjustments({
     super.key,
     required this.viewModel,
   });
 
   @override
-  State<AdjustmentItems> createState() => _AdjustmentItemsState();
+  State<Adjustments> createState() => _AdjustmentsState();
 }
 
-class _AdjustmentItemsState extends State<AdjustmentItems> {
+class _AdjustmentsState extends State<Adjustments> {
   List<Widget> adjustmentModalItems = [];
   List<Widget> formFields = [];
 
