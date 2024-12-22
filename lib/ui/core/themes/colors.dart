@@ -6,6 +6,7 @@ sealed class AppColors {
   static const Color purple1 = Color(0xFF5940d8);
   static const Color red1 = Color(0xFFdb1a1a);
   static const Color grey1 = Color(0xffbababa);
+  static const Color grey2 = Color(0xff737373);
 
   static const lightColorScheme = ColorScheme(
     brightness: Brightness.light,

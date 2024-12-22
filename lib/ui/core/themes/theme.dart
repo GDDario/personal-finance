@@ -8,6 +8,10 @@ sealed class AppTheme {
       fontSize: 22,
       fontWeight: FontWeight.w500,
     ),
+    labelSmall: TextStyle(
+      fontSize: 10,
+      color: AppColors.grey2
+    ),
   );
 
   static final InputDecorationTheme _inputDecorationTheme =
