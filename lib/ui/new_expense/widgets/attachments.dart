@@ -25,20 +25,23 @@ class _AttachmentsState extends State<Attachments> {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
         children: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.purple1,
-            ),
-            onPressed: _openFilePicker,
-            child: const Row(
-              children: [
-                Text('Add attachments'),
-                Spacer(),
-                Icon(
-                  Icons.attach_file,
-                  color: Colors.white,
-                ),
-              ],
+          Tooltip(
+            message: 'Receipts, vouchers, etc.',
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.purple1,
+              ),
+              onPressed: _openFilePicker,
+              child: const Row(
+                children: [
+                  Text('Add attachments'),
+                  Spacer(),
+                  Icon(
+                    Icons.attach_file,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
             ),
           ),
           ...widget.viewModel.attachments.map(
@@ -66,7 +69,7 @@ class _AttachmentsState extends State<Attachments> {
                   ),
                   IconButton(
                     onPressed: () => _removeAttachment(attachment),
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                   ),
                 ],
               );
