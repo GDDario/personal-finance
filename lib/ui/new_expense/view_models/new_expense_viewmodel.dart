@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/data/mock/adjustment_mock.dart';
+import 'package:personal_finance/data/mock/establishments_mock.dart';
 import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/data/mock/products_mock.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/attachment.dart';
+import 'package:personal_finance/domain/models/establishment.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
   final List<DropdownMenuEntry<int>> menuItems = [
@@ -64,6 +66,8 @@ class NewExpenseViewModel extends ChangeNotifier {
   ];
   List<Adjustment> adjustments = adjustmentsMock;
   List<Attachment> attachments = [];
+  List<Establishment> establishments = establishmentsMock;
+  late Establishment establishment;
 
   void addDataRow() {}
 }

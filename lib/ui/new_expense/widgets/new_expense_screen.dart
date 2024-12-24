@@ -6,6 +6,7 @@ import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmode
 import 'package:personal_finance/ui/new_expense/widgets/adjustments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
+import 'package:personal_finance/ui/new_expense/widgets/search_establishment_text_field.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
@@ -61,13 +62,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                         alignmentOffset: const Offset(250, 0),
                         onSelected: (_) {},
                       ),
-                      SizedBox(
-                        width: 220,
-                        child: SearchTextField(
-                          controller: _establishmentController,
-                          label: 'Establishment',
-                          onIconPressed: () {},
-                        ),
+                      SearchEstablishmentTextField(
+                        establishmentController: _establishmentController,
+                        viewModel: widget.viewModel,
                       ),
                       SizedBox(
                         width: 220,
