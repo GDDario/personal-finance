@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/ui/core/ui/pick_list_modal.dart';
+import 'package:personal_finance/ui/core/ui/searchable_pick_list_modal.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 
@@ -36,7 +36,7 @@ class _SearchEstablishmentTextFieldState
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
-        return PickListModal(
+        return SearchablePickListModal(
             dialogContext: dialogContext,
             title: 'Choose an establishment to add',
             children: widget.viewModel.establishments.map((item) {
