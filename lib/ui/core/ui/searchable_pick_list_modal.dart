@@ -46,10 +46,14 @@ class _SearchablePickListModalState extends State<SearchablePickListModal> {
         child: SizedBox(
           width: 400,
           child: Column(
+            spacing: 20,
             children: [
               TextFormField(
                 controller: _searchController,
                 onChanged: _onSearch,
+                decoration: const InputDecoration(
+                  labelText: 'Search here'
+                ),
               ),
               SingleChildScrollView(
                 child: Column(children: _filteredChildren),
