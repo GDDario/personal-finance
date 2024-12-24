@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/ui/core/themes/colors.dart';
-import 'package:personal_finance/ui/core/themes/default_metrics.dart';
+import 'package:personal_finance/ui/core/ui/pick_list_modal.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 
 class Adjustments extends StatefulWidget {
@@ -51,53 +51,24 @@ class _AdjustmentsState extends State<Adjustments> {
     showDialog(
       context: context,
       builder: (BuildContext dialogContext) {
-        return AlertDialog(
-          title: Text(
-            'Choose an adjustment to add',
-            style: TextStyle(
-              fontSize: Theme.of(context).textTheme.headlineLarge!.fontSize,
-            ),
-          ),
-          backgroundColor: Colors.white,
-          content: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 700),
-            child: SizedBox(
-              width: 400,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: adjustmentModalItems.map((item) {
-                    if (item is ListTile) {
-                      return ListTile(
-                        title: item.title,
-                        trailing: item.trailing,
-                        onTap: () {
-                          Navigator.of(dialogContext).pop();
-                          if (item.onTap != null) {
-                            item.onTap!();
-                          }
-                        },
-                      );
-                    }
-                    return item;
-                  }).toList(),
-                ),
-              ),
-            ),
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
+        return PickListModal(
+            dialogContext: dialogContext,
+            title: 'Choose an adjustment to add',
+            children: adjustmentModalItems.map((item) {
+              if (item is ListTile) {
+                return ListTile(
+                  title: item.title,
+                  trailing: item.trailing,
+                  onTap: () {
                     Navigator.of(dialogContext).pop();
+                    if (item.onTap != null) {
+                      item.onTap!();
+                    }
                   },
-                  child: const Text('Close'),
-                ),
-              ],
-            ),
-          ],
-        );
+                );
+              }
+              return item;
+            }).toList());
       },
     );
   }
