@@ -56,6 +56,12 @@ sealed class AppTheme {
     ),
   );
 
+  static final DialogThemeData _dialogTheme = DialogThemeData(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
+    )
+  );
+
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.light,
@@ -66,6 +72,7 @@ sealed class AppTheme {
     elevatedButtonTheme: _elevatedButtonTheme,
     listTileTheme: _listTileTheme,
     textTheme: _textTheme,
+    dialogTheme: _dialogTheme,
     fontFamily: 'Inter',
   );
 }

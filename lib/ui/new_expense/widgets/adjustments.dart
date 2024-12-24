@@ -52,9 +52,6 @@ class _AdjustmentsState extends State<Adjustments> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DefaultMetrics.borderRadius),
-          ),
           title: Text(
             'Choose an adjustment to add',
             style: TextStyle(
