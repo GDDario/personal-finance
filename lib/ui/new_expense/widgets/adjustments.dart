@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
+import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/ui/core/themes/colors.dart';
 import 'package:personal_finance/ui/core/ui/searchable_pick_list_modal.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
@@ -17,14 +18,7 @@ class Adjustments extends StatefulWidget {
 }
 
 class _AdjustmentsState extends State<Adjustments> {
-  List<Widget> adjustmentModalItems = [];
   List<Widget> formFields = [];
-
-  @override
-  void initState() {
-    _initiateItems();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,56 +46,32 @@ class _AdjustmentsState extends State<Adjustments> {
       context: context,
       builder: (BuildContext dialogContext) {
         return SearchablePickListModal(
-            dialogContext: dialogContext,
-            title: 'Choose an adjustment to add',
-            children: adjustmentModalItems.map((item) {
-              if (item is ListTile) {
-                return ListTile(
-                  title: item.title,
-                  trailing: item.trailing,
-                  onTap: () {
-                    Navigator.of(dialogContext).pop();
-                    if (item.onTap != null) {
-                      item.onTap!();
-                    }
-                  },
-                );
-              }
-              return item;
-            }).toList());
+          dialogContext: dialogContext,
+          title: 'Choose an adjustment to add',
+          children: widget.viewModel.adjustments.map((Adjustment adjustment) {
+            return ListTile(
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    adjustment.typeString(),
+                    style: const TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
+                  Text(adjustment.name)
+                ],
+              ),
+              trailing: const Icon(Icons.add),
+              onTap: () {
+                _addFormField(adjustment);
+                Navigator.of(dialogContext).pop();
+              },
+            );
+          }).toList(),
+        );
       },
     );
-  }
-
-  void _initiateItems() {
-    int lastIndex = widget.viewModel.adjustments.length - 1;
-
-    for (int i = 0; i < widget.viewModel.adjustments.length; i++) {
-      Adjustment adjustment = widget.viewModel.adjustments[i];
-
-      adjustmentModalItems.add(ListTile(
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              adjustment.typeString(),
-              style: const TextStyle(
-                fontSize: 12,
-              ),
-            ),
-            Text(adjustment.name)
-          ],
-        ),
-        trailing: const Icon(Icons.add),
-        onTap: () => _addFormField(adjustment),
-      ));
-
-      if (i != lastIndex) {
-        adjustmentModalItems.add(const Divider(
-          color: AppColors.grey1,
-        ));
-      }
-    }
   }
 
   void _addFormField(Adjustment adjustment) {
@@ -135,3 +105,4 @@ class _AdjustmentsState extends State<Adjustments> {
     });
   }
 }
+
