@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:personal_finance/ui/core/ui/searchable_pick_list_modal.dart';
 import 'package:personal_finance/ui/core/ui/search_text_field.dart';
+import 'package:personal_finance/ui/core/ui/searchable_pick_list_modal.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 
 class SearchEstablishmentTextField extends StatefulWidget {
-  final TextEditingController establishmentController;
+  final TextEditingController controller;
   final NewExpenseViewModel viewModel;
 
   const SearchEstablishmentTextField({
     super.key,
-    required this.establishmentController,
+    required this.controller,
     required this.viewModel,
   });
 
@@ -25,7 +25,7 @@ class _SearchEstablishmentTextFieldState
     return SizedBox(
       width: 220,
       child: SearchTextField(
-        controller: widget.establishmentController,
+        controller: widget.controller,
         label: 'Establishment',
         onIconPressed: _openEstablishmentsDialog,
       ),
@@ -45,7 +45,7 @@ class _SearchEstablishmentTextFieldState
                 trailing: const Icon(Icons.add),
                 onTap: () {
                   Navigator.of(dialogContext).pop();
-                  widget.establishmentController.text = item.name;
+                  widget.controller.text = item.name;
                   widget.viewModel.establishment = item;
                 },
               );

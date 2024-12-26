@@ -6,6 +6,7 @@ import 'package:personal_finance/data/mock/products_mock.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/attachment.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
+import 'package:personal_finance/domain/models/generic_item.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
   final List<DropdownMenuEntry<int>> menuItems = [
@@ -32,42 +33,44 @@ class NewExpenseViewModel extends ChangeNotifier {
   ];
   List<DataRow> tableItems = [
     DataRow(cells: [
-      DataCell(Text(products.first.id.toString())),
-      DataCell(Text(products.first.name)),
-      DataCell(Text(products.first.category.name)),
-      DataCell(Text(products.first.price.toStringAsFixed(2))),
+      DataCell(Text(productsMock.first.id.toString())),
+      DataCell(Text(productsMock.first.name)),
+      DataCell(Text(productsMock.first.category.name)),
+      DataCell(Text(productsMock.first.price.toStringAsFixed(2))),
       DataCell(Text(1.toString())),
-      DataCell(Text(products.first.price.toStringAsFixed(2))),
+      DataCell(Text(productsMock.first.price.toStringAsFixed(2))),
     ]),
     DataRow(cells: [
-      DataCell(Text(products[1].id.toString())),
-      DataCell(Text(products[1].name)),
-      DataCell(Text(products[1].category.name)),
-      DataCell(Text(products[1].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[1].id.toString())),
+      DataCell(Text(productsMock[1].name)),
+      DataCell(Text(productsMock[1].category.name)),
+      DataCell(Text(productsMock[1].price.toStringAsFixed(2))),
       DataCell(Text(1.toString())),
-      DataCell(Text(products[1].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[1].price.toStringAsFixed(2))),
     ]),
     DataRow(cells: [
-      DataCell(Text(products[2].id.toString())),
-      DataCell(Text(products[2].name)),
-      DataCell(Text(products[2].category.name)),
-      DataCell(Text(products[2].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[2].id.toString())),
+      DataCell(Text(productsMock[2].name)),
+      DataCell(Text(productsMock[2].category.name)),
+      DataCell(Text(productsMock[2].price.toStringAsFixed(2))),
       DataCell(Text(1.toString())),
-      DataCell(Text(products[2].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[2].price.toStringAsFixed(2))),
     ]),
     DataRow(cells: [
-      DataCell(Text(products[3].id.toString())),
-      DataCell(Text(products[3].name)),
-      DataCell(Text(products[3].category.name)),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[3].id.toString())),
+      DataCell(Text(productsMock[3].name)),
+      DataCell(Text(productsMock[3].category.name)),
+      DataCell(Text(productsMock[3].price.toStringAsFixed(2))),
       DataCell(Text(1.toString())),
-      DataCell(Text(products[3].price.toStringAsFixed(2))),
+      DataCell(Text(productsMock[3].price.toStringAsFixed(2))),
     ]),
   ];
   List<Adjustment> adjustments = adjustmentsMock;
   List<Attachment> attachments = [];
   List<Establishment> establishments = establishmentsMock;
   late Establishment establishment;
+  List<GenericItem> items = productsMock;
+  List<GenericItem> selectedItems = [];
 
   void addDataRow() {}
 }

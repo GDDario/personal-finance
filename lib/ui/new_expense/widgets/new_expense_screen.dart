@@ -7,6 +7,7 @@ import 'package:personal_finance/ui/new_expense/widgets/adjustments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_establishment_text_field.dart';
+import 'package:personal_finance/ui/new_expense/widgets/search_items_text_field.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
@@ -63,7 +64,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                         onSelected: (_) {},
                       ),
                       SearchEstablishmentTextField(
-                        establishmentController: _establishmentController,
+                        controller: _establishmentController,
                         viewModel: widget.viewModel,
                       ),
                       SizedBox(
@@ -78,13 +79,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                   Row(
                     spacing: 15,
                     children: <Widget>[
-                      SizedBox(
-                        width: 220,
-                        child: SearchTextField(
-                          controller: _itemController,
-                          label: 'Search for an item',
-                          onIconPressed: () {},
-                        ),
+                      SearchItemsTextField(
+                        controller: _itemController,
+                        viewModel: widget.viewModel,
                       ),
                       Directionality(
                         textDirection: TextDirection.rtl,
