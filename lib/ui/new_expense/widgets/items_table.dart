@@ -1,13 +1,23 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
+import 'package:provider/provider.dart';
 
-class ItemsTable extends StatelessWidget {
-  final List<DataRow> rows;
+class ItemsTable extends StatefulWidget {
+  final NewExpenseViewModel viewModel;
 
-  const ItemsTable({super.key, required this.rows});
+  const ItemsTable({super.key, required this.viewModel});
+
+  @override
+  State<ItemsTable> createState() => _ItemsTableState();
+}
+
+class _ItemsTableState extends State<ItemsTable> {
 
   @override
   Widget build(BuildContext context) {
+    final rows = context.watch<NewExpenseViewModel>().tableItems;
+
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 800),
       child: SizedBox(

@@ -8,6 +8,7 @@ import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_establishment_text_field.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_items_text_field.dart';
+import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
   final NewExpenseViewModel viewModel;
@@ -96,8 +97,11 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                       )
                     ],
                   ),
-                  ItemsTable(
-                    rows: widget.viewModel.tableItems,
+                  ChangeNotifierProvider(
+                    create: (_) => widget.viewModel,
+                    child: ItemsTable(
+                      viewModel: widget.viewModel,
+                    ),
                   ),
                   Row(
                     spacing: 15,

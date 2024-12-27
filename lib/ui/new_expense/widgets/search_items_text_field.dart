@@ -49,7 +49,10 @@ class _SearchItemsTextFieldState extends State<SearchItemsTextField> {
                 itemBuilder: (BuildContext context, int index) {
                   final GenericItem option = items.elementAt(index);
                   return InkWell(
-                    onTap: () => onSelected(option.name),
+                    onTap: () {
+                      onSelected(option.name);
+                      selectItem(option);
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: Column(
@@ -141,5 +144,9 @@ class _SearchItemsTextFieldState extends State<SearchItemsTextField> {
             }).toList());
       },
     );
+  }
+
+  void selectItem(GenericItem item) {
+    widget.viewModel.addDataRow(item);
   }
 }
