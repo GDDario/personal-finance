@@ -13,7 +13,6 @@ class ItemsTable extends StatefulWidget {
 }
 
 class _ItemsTableState extends State<ItemsTable> {
-
   @override
   Widget build(BuildContext context) {
     final rows = context.watch<NewExpenseViewModel>().tableItems;
@@ -37,7 +36,18 @@ class _ItemsTableState extends State<ItemsTable> {
               DataColumn(label: Text("Quantity")),
               DataColumn(label: Text("Total")),
             ],
-            rows: rows,
+            rows: rows.map((row) {
+              return DataRow(
+                cells: [
+                  DataCell(Text(row.id)),
+                  DataCell(Text(row.name)),
+                  DataCell(Text(row.categoryName)),
+                  DataCell(Text(row.value.toStringAsFixed(2))),
+                  DataCell(Text(row.quantity.toString())),
+                  DataCell(Text(row.total.toStringAsFixed(2))),
+                ],
+              );
+            }).toList(),
           )),
     );
   }

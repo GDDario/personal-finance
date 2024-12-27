@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:personal_finance/data/mock/adjustment_mock.dart';
 import 'package:personal_finance/data/mock/establishments_mock.dart';
@@ -10,6 +8,7 @@ import 'package:personal_finance/domain/models/attachment.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/domain/models/generic_item.dart';
 import 'package:personal_finance/domain/models/product.dart';
+import 'package:personal_finance/ui/new_expense/model/expense_table_row_data.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
   final List<DropdownMenuEntry<int>> menuItems = [
@@ -34,40 +33,33 @@ class NewExpenseViewModel extends ChangeNotifier {
       label: paymentMethodsMock[4].name,
     ),
   ];
-  List<DataRow> tableItems = [
-    DataRow(cells: [
-      DataCell(Text(productsMock.first.id.toString())),
-      DataCell(Text(productsMock.first.name)),
-      DataCell(Text(productsMock.first.category.name)),
-      DataCell(Text(productsMock.first.price.toStringAsFixed(2))),
-      const DataCell(Text("1")),
-      DataCell(Text(productsMock.first.price.toStringAsFixed(2))),
-    ]),
-    DataRow(cells: [
-      DataCell(Text(productsMock[1].id.toString())),
-      DataCell(Text(productsMock[1].name)),
-      DataCell(Text(productsMock[1].category.name)),
-      DataCell(Text(productsMock[1].price.toStringAsFixed(2))),
-      const DataCell(Text("1")),
-      DataCell(Text(productsMock[1].price.toStringAsFixed(2))),
-    ]),
-    DataRow(cells: [
-      DataCell(Text(productsMock[2].id.toString())),
-      DataCell(Text(productsMock[2].name)),
-      DataCell(Text(productsMock[2].category.name)),
-      DataCell(Text(productsMock[2].price.toStringAsFixed(2))),
-      const DataCell(Text("1")),
-      DataCell(Text(productsMock[2].price.toStringAsFixed(2))),
-    ]),
-    DataRow(cells: [
-      DataCell(Text(productsMock[3].id.toString())),
-      DataCell(Text(productsMock[3].name)),
-      DataCell(Text(productsMock[3].category.name)),
-      DataCell(Text(productsMock[3].price.toStringAsFixed(2))),
-      const DataCell(Text("1")),
-      DataCell(Text(productsMock[3].price.toStringAsFixed(2))),
-    ]),
+  List<ExpenseTableRowData> tableItems = [
+    ExpenseTableRowData(
+      id: productsMock.first.id.toString(),
+      name: productsMock.first.name,
+      categoryName: productsMock.first.category.name,
+      value: productsMock.first.price,
+      quantity: 1,
+      total: productsMock.first.price,
+    ),
+    ExpenseTableRowData(
+      id: productsMock[1].id.toString(),
+      name: productsMock[1].name,
+      categoryName: productsMock[1].category.name,
+      value: productsMock[1].price,
+      quantity: 1,
+      total: productsMock[1].price,
+    ),
+    ExpenseTableRowData(
+      id: productsMock[2].id.toString(),
+      name: productsMock[2].name,
+      categoryName: productsMock[2].category.name,
+      value: productsMock[2].price,
+      quantity: 1,
+      total: productsMock[2].price,
+    )
   ];
+
   List<Adjustment> adjustments = adjustmentsMock;
   List<Attachment> attachments = [];
   List<Establishment> establishments = establishmentsMock;
@@ -76,46 +68,30 @@ class NewExpenseViewModel extends ChangeNotifier {
   List<GenericItem> selectedItems = [];
 
   void addDataRow(GenericItem item) {
-    // print('Table items before ' + tableItems.toString());
     double value = 0;
 
     if (item is Product) {
       value = item.price;
     }
 
-    var hypotheticalItem = tableItems
-        .where((tableItem) =>
-            (tableItem.cells.first.child as Text).data == item.id.toString())
+    ExpenseTableRowData? existingRow = tableItems
+        .where(
+          (row) => row.id == item.id.toString(),
+        )
         .firstOrNull;
 
-    if (hypotheticalItem != null) {
-      var valueCellValue =
-      double.parse((hypotheticalItem.cells[3].child as Text).data!);
-      var quantityCellValue =
-      double.parse((hypotheticalItem.cells[4].child as Text).data!);
-      var totalCellValue =
-          double.parse((hypotheticalItem.cells[5].child as Text).data!);
-
-      hypotheticalItem.cells[4] =
-          DataCell(Text((quantityCellValue + 1).toString()));
-      hypotheticalItem.cells[5] =
-          DataCell(Text((totalCellValue + valueCellValue).toStringAsFixed(2)));
+    if (existingRow != null) {
+      existingRow.incrementQuantity(value);
     } else {
-      tableItems.add(
-        DataRow(
-          cells: [
-            DataCell(Text(item.id.toString())),
-            DataCell(Text(item.name)),
-            DataCell(Text(item.category.name)),
-            DataCell(Text(value.toStringAsFixed(2))),
-            const DataCell(Text("1")),
-            DataCell(Text(value.toStringAsFixed(2))),
-          ],
-        ),
-      );
+      tableItems.add(ExpenseTableRowData(
+        id: item.id.toString(),
+        name: item.name,
+        categoryName: item.category.name,
+        value: value,
+        total: value,
+      ));
     }
 
     notifyListeners();
-    // print('Table items now ' + tableItems.toString());
   }
 }
