@@ -47,7 +47,7 @@ class _SearchItemsTextFieldState extends State<SearchItemsTextField> {
                 itemCount: options.length,
                 shrinkWrap: false,
                 itemBuilder: (BuildContext context, int index) {
-                  final GenericItem option = items.elementAt(index);
+                  final GenericItem option = options.elementAt(index) as GenericItem;
                   return InkWell(
                     onTap: () {
                       onSelected(option.name);
@@ -101,8 +101,7 @@ class _SearchItemsTextFieldState extends State<SearchItemsTextField> {
               focusNode: focusNode,
               onFieldSubmitted: (value) => onFieldSubmitted,
               decoration: const InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10),
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
                 border: OutlineInputBorder(gapPadding: 1),
                 hintText: "Search...",
               ));
@@ -111,38 +110,15 @@ class _SearchItemsTextFieldState extends State<SearchItemsTextField> {
           if (textEditingValue.text == '') {
             return const Iterable<String>.empty();
           }
-          return widget.viewModel.items
-              .map((item) => item.name)
-              .where((String option) {
-            return option.contains(textEditingValue.text.toLowerCase());
-          });
+
+          return widget.viewModel.items.where((item) => item.name
+              .toLowerCase()
+              .contains(textEditingValue.text.toLowerCase()));
         },
         // controller: widget.controller,
         // label: 'Search for an item',
         // onIconPressed: _openEstablishmentsDialog,
       ),
-    );
-  }
-
-  void _openEstablishmentsDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext dialogContext) {
-        return SearchablePickListModal(
-            dialogContext: dialogContext,
-            title: 'Choose an item to add',
-            children: widget.viewModel.establishments.map((item) {
-              return ListTile(
-                title: Text(item.name),
-                trailing: const Icon(Icons.add),
-                onTap: () {
-                  Navigator.of(dialogContext).pop();
-                  widget.controller.text = item.name;
-                  widget.viewModel.establishment = item;
-                },
-              );
-            }).toList());
-      },
     );
   }
 
