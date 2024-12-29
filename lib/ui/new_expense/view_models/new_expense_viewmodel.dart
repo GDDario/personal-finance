@@ -104,4 +104,9 @@ class NewExpenseViewModel extends ChangeNotifier {
     tableItems[itemIndex].changeQuantity(int.parse(newQuantity));
     notifyListeners();
   }
+
+  void removeTableRow(ExpenseTableRowData row) {
+    tableItems.remove(row);
+    notifyListeners();
+  }
 }

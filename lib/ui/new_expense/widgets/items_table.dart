@@ -35,30 +35,42 @@ class _ItemsTableState extends State<ItemsTable> {
             DataColumn(label: Text("Value")),
             DataColumn(label: Text("Quantity")),
             DataColumn(label: Text("Total")),
+            DataColumn(label: Text("Actions")),
           ],
           rows: rows
               .asMap()
               .map((i, row) {
                 return MapEntry(
-                    i,
-                    DataRow(
-                      cells: [
-                        DataCell(Text(row.id)),
-                        DataCell(Text(row.name)),
-                        DataCell(Text(row.categoryName)),
-                        DataCell(SelectableItemText(
+                  i,
+                  DataRow(
+                    cells: [
+                      DataCell(Text(row.id)),
+                      DataCell(Text(row.name)),
+                      DataCell(Text(row.categoryName)),
+                      DataCell(
+                        SelectableItemText(
                           mask: "\$ ",
                           value: "\$ ${row.value.toStringAsFixed(2)}",
                           callback: (dynamic newValue) =>
                               widget.viewModel.changeItemPrice(newValue, i),
-                        )),
-                        DataCell(SelectableItemText(
+                        ),
+                      ),
+                      DataCell(
+                        SelectableItemText(
                             value: row.quantity.toString(),
                             callback: (dynamic newValue) =>
-                                widget.viewModel.changeQuantity(newValue, i))),
-                        DataCell(Text("\$ ${row.total.toStringAsFixed(2)}")),
-                      ],
-                    ));
+                                widget.viewModel.changeQuantity(newValue, i)),
+                      ),
+                      DataCell(Text("\$ ${row.total.toStringAsFixed(2)}")),
+                      DataCell(
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: () => widget.viewModel.removeTableRow(row),
+                        ),
+                      )
+                    ],
+                  ),
+                );
               })
               .values
               .toList(),
