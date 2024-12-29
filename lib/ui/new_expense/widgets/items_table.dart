@@ -54,9 +54,8 @@ class _ItemsTableState extends State<ItemsTable> {
                         )),
                         DataCell(SelectableItemText(
                             value: row.quantity.toString(),
-                            callback: (dynamic newValue) {
-                              widget.viewModel.changeQuantity(newValue, i);
-                            })),
+                            callback: (dynamic newValue) =>
+                                widget.viewModel.changeQuantity(newValue, i))),
                         DataCell(Text("\$ ${row.total.toStringAsFixed(2)}")),
                       ],
                     ));
@@ -93,13 +92,24 @@ class _SelectableItemTextState extends State<SelectableItemText> {
   @override
   void initState() {
     super.initState();
-    controller.text = widget.value.toString().replaceAll("\$ ", "");
+    updateTextValueFromWidget();
 
     focusNode.addListener(() {
       if (!focusNode.hasFocus) {
         updateField();
       }
     });
+  }
+
+  @override
+  void didUpdateWidget(SelectableItemText oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    updateTextValueFromWidget();
+  }
+
+  void updateTextValueFromWidget() {
+    controller.text = widget.value.toString().replaceAll("\$ ", "");
   }
 
   void updateField() {
