@@ -15,8 +15,18 @@ class ExpenseTableRowData {
     required this.total,
   });
 
-  void incrementQuantity(double itemValue) {
-    quantity += 1;
-    total += itemValue;
+  void incrementQuantity() {
+    quantity++;
+    total += value;
+  }
+
+  void changeValue(double newValue) {
+    value = newValue;
+    total = quantity * newValue;
+  }
+
+  void changeQuantity(int newQuantity) {
+    quantity = newQuantity;
+    total = quantity * value;
   }
 }

@@ -81,7 +81,7 @@ class NewExpenseViewModel extends ChangeNotifier {
         .firstOrNull;
 
     if (existingRow != null) {
-      existingRow.incrementQuantity(value);
+      existingRow.incrementQuantity();
     } else {
       tableItems.add(ExpenseTableRowData(
         id: item.id.toString(),
@@ -92,6 +92,16 @@ class NewExpenseViewModel extends ChangeNotifier {
       ));
     }
 
+    notifyListeners();
+  }
+
+  void changeItemPrice(dynamic newValue, int itemIndex) {
+    tableItems[itemIndex].changeValue(double.parse(newValue));
+    notifyListeners();
+  }
+
+  void changeQuantity(dynamic newQuantity, int itemIndex) {
+    tableItems[itemIndex].changeQuantity(int.parse(newQuantity));
     notifyListeners();
   }
 }
