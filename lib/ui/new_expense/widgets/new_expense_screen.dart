@@ -7,6 +7,7 @@ import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_establishment_text_field.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_items_text_field.dart';
+import 'package:personal_finance/ui/new_expense/widgets/summary_table.dart';
 import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
@@ -31,11 +32,6 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double _total = widget.viewModel.total;
-    double _totalItems = widget.viewModel.totalItems;
-    double _totalDiscounts = widget.viewModel.totalDiscounts;
-    double _totalAdditions = widget.viewModel.totalAdditions;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -147,65 +143,7 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                             )
                           ],
                         ),
-                        Row(
-                          spacing: 15,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                if (_totalItems > 0)
-                                  Text(
-                                    'Items:',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                if (_totalAdditions > 0)
-                                  Text(
-                                    'Additions:',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                if (_totalDiscounts > 0)
-                                  Text(
-                                    'Discounts:',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                Text(
-                                  "Total:",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                if (_totalItems > 0)
-                                  Text(
-                                    '+ \$ ${_totalItems.toStringAsFixed(2)}',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                if (_totalAdditions > 0)
-                                  Text(
-                                    '+ \$ ${_totalAdditions.toStringAsFixed(2)}',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                if (_totalDiscounts > 0)
-                                  Text(
-                                    '- \$ ${_totalDiscounts.toStringAsFixed(2)}',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                Text(
-                                  "\$ ${_total.toStringAsFixed(2)}",
-                                  style: Theme.of(context).textTheme.bodyLarge,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                        SummaryTable(viewModel: widget.viewModel),
                       ],
                     ),
                   ),
