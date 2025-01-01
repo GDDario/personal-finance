@@ -24,22 +24,26 @@ class _AdjustmentsState extends State<Adjustments> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      spacing: 15,
-      children: <Widget>[
-        Directionality(
-          textDirection: TextDirection.rtl,
-          child: ElevatedButton.icon(
-            onPressed: _openAdjustmentOptionsDialog,
-            label: const Text('Add discount/addition'),
-            icon: const Icon(
-              Icons.add,
-              color: Colors.white,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 500),
+      child: Wrap(
+        spacing: 15,
+        runSpacing: 20,
+        children: <Widget>[
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: ElevatedButton.icon(
+              onPressed: _openAdjustmentOptionsDialog,
+              label: const Text('Add discount/addition'),
+              icon: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
             ),
           ),
-        ),
-        ...formFields
-      ],
+          ...formFields
+        ],
+      ),
     );
   }
 
