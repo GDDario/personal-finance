@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:personal_finance/data/mock/adjustment_mock.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/ui/core/themes/colors.dart';
@@ -48,7 +50,8 @@ class _AdjustmentsState extends State<Adjustments> {
         return SearchablePickListModal(
           dialogContext: dialogContext,
           title: 'Choose an adjustment to add',
-          children: widget.viewModel.adjustments.map((Adjustment adjustment) {
+          children:
+              widget.viewModel.adjustmentsList.map((Adjustment adjustment) {
             return ListTile(
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -81,28 +84,38 @@ class _AdjustmentsState extends State<Adjustments> {
       key: formKey,
       width: 220,
       child: TextFormField(
+        initialValue: "0",
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ], //
         decoration: InputDecoration(
           label: Text("${adjustment.name} (${adjustment.typeString()})"),
           suffixIcon: Padding(
             padding: const EdgeInsets.only(right: 4.0),
             child: IconButton(
-              onPressed: () => _removeFormField(formKey),
+              onPressed: () => _removeFormField(formKey, adjustment),
               icon: const Icon(Icons.close),
             ),
           ),
         ),
+        onChanged: (String value) =>
+            widget.viewModel.updateAdjustment(adjustment, double.parse(value)),
       ),
     );
+
+    widget.viewModel.addAdjustment(adjustment);
 
     setState(() {
       formFields.add(formField);
     });
   }
 
-  void _removeFormField(GlobalKey formKey) {
+  void _removeFormField(GlobalKey formKey, Adjustment adjustment) {
+    widget.viewModel.removeAdjustment(adjustment);
+
     setState(() {
       formFields.removeWhere((field) => field.key == formKey);
     });
   }
 }
-

@@ -37,7 +37,10 @@ class SummaryTable extends StatelessWidget {
               ),
             Text(
               "Total:",
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
@@ -61,7 +64,10 @@ class SummaryTable extends StatelessWidget {
               ),
             Text(
               "\$ ${total.toStringAsFixed(2)}",
-              style: Theme.of(context).textTheme.bodyLarge,
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),

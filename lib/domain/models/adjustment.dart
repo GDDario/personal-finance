@@ -5,6 +5,8 @@ abstract class Adjustment {
   late DateTime createdAt;
   late DateTime? updatedAt;
 
+  double value = 0;
+
   Adjustment(this.id, this.name);
 
   String typeString();

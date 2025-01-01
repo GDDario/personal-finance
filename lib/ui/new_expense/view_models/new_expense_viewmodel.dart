@@ -3,8 +3,10 @@ import 'package:personal_finance/data/mock/adjustment_mock.dart';
 import 'package:personal_finance/data/mock/establishments_mock.dart';
 import 'package:personal_finance/data/mock/payment_method_mock.dart';
 import 'package:personal_finance/data/mock/products_mock.dart';
+import 'package:personal_finance/domain/models/addition.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/attachment.dart';
+import 'package:personal_finance/domain/models/discount.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/domain/models/generic_item.dart';
 import 'package:personal_finance/domain/models/product.dart';
@@ -64,7 +66,8 @@ class NewExpenseViewModel extends ChangeNotifier {
     // )
   ];
 
-  List<Adjustment> adjustments = adjustmentsMock;
+  List<Adjustment> adjustmentsList = adjustmentsMock;
+  List<Adjustment> expenseAdjustments = [];
   List<Attachment> attachments = [];
   List<Establishment> establishments = establishmentsMock;
   late Establishment establishment;
@@ -96,26 +99,45 @@ class NewExpenseViewModel extends ChangeNotifier {
       ));
     }
 
-    calculateTotals();
-    notifyListeners();
+    updateState();
   }
 
   void changeItemPrice(dynamic newValue, int itemIndex) {
     tableItems[itemIndex].changeValue(double.parse(newValue));
-    calculateTotals();
-    notifyListeners();
+    updateState();
   }
 
   void changeQuantity(dynamic newQuantity, int itemIndex) {
     tableItems[itemIndex].changeQuantity(int.parse(newQuantity));
-    calculateTotals();
-    notifyListeners();
+    updateState();
   }
 
   void removeTableRow(ExpenseTableRowData row) {
     tableItems.remove(row);
-    calculateTotals();
-    notifyListeners();
+    updateState();
+  }
+
+  void addAdjustment(Adjustment adjustment) {
+    expenseAdjustments.add(adjustment);
+    updateState();
+  }
+
+  void updateAdjustment(Adjustment adjustment, double newValue) {
+    int index = expenseAdjustments.indexWhere((item) => item == adjustment);
+    if (index != -1) {
+      expenseAdjustments[index].value = newValue;
+    } else {
+      print('Adjustment not found.');
+    }
+
+    updateState();
+  }
+
+  void removeAdjustment(Adjustment adjustment) {
+    // TODO: remove and fix the bug that keeps the adjustment value
+    adjustment.value = 0;
+    expenseAdjustments.remove(adjustment);
+    updateState();
   }
 
   void calculateTotals() {
@@ -123,8 +145,28 @@ class NewExpenseViewModel extends ChangeNotifier {
       0.0,
       (double sum, ExpenseTableRowData element) => sum + element.total,
     );
-    totalItems = itemsTotal;
 
-    total = totalItems;
+    var discounts = expenseAdjustments.whereType<Discount>();
+    var additions = expenseAdjustments.whereType<Addition>();
+
+    double discountsTotal = discounts.fold(
+      0.0,
+      (double sum, Discount element) => sum + element.value,
+    );
+    double additionsTotal = additions.fold(
+      0.0,
+      (double sum, Addition element) => sum + element.value,
+    );
+
+    totalAdditions = additionsTotal;
+    totalDiscounts = discountsTotal;
+
+    totalItems = itemsTotal;
+    total = totalItems + additionsTotal - discountsTotal;
+  }
+
+  void updateState() {
+    calculateTotals();
+    notifyListeners();
   }
 }
