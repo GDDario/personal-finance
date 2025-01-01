@@ -11,6 +11,10 @@ import 'package:personal_finance/domain/models/product.dart';
 import 'package:personal_finance/ui/new_expense/model/expense_table_row_data.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
+  double total = 250.78;
+  double totalItems = 2;
+  double totalDiscounts = 1;
+  double totalAdditions = 3;
   final List<DropdownMenuEntry<int>> menuItems = [
     DropdownMenuEntry(
       value: paymentMethodsMock[0].id,

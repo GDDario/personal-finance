@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
-import 'package:personal_finance/ui/core/ui/search_text_field.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 import 'package:personal_finance/ui/new_expense/widgets/adjustments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
@@ -32,6 +31,11 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double _total = widget.viewModel.total;
+    double _totalItems = widget.viewModel.totalItems;
+    double _totalDiscounts = widget.viewModel.totalDiscounts;
+    double _totalAdditions = widget.viewModel.totalAdditions;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -103,35 +107,108 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                       viewModel: widget.viewModel,
                     ),
                   ),
-                  Row(
-                    spacing: 15,
-                    children: <Widget>[
-                      Adjustments(viewModel: widget.viewModel)
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    spacing: 15,
-                    children: <Widget>[
-                      Attachments(viewModel: widget.viewModel),
-                      SizedBox(
-                        width: 150,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Row(
-                            children: [
-                              Text('Finish'),
-                              Spacer(),
-                              Icon(
-                                Icons.check_circle_outline,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 800),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          spacing: 20,
+                          children: [
+                            Row(
+                              spacing: 15,
+                              children: <Widget>[
+                                Adjustments(viewModel: widget.viewModel)
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              spacing: 15,
+                              children: <Widget>[
+                                Attachments(viewModel: widget.viewModel),
+                                SizedBox(
+                                  width: 150,
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Row(
+                                      children: [
+                                        Text('Finish'),
+                                        Spacer(),
+                                        Icon(
+                                          Icons.check_circle_outline,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
+                          ],
                         ),
-                      ),
-                    ],
-                  )
+                        Row(
+                          spacing: 15,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                if (_totalItems > 0)
+                                  Text(
+                                    'Items:',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                if (_totalAdditions > 0)
+                                  Text(
+                                    'Additions:',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                if (_totalDiscounts > 0)
+                                  Text(
+                                    'Discounts:',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                Text(
+                                  "Total:",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                if (_totalItems > 0)
+                                  Text(
+                                    '+ \$ ${_totalItems.toStringAsFixed(2)}',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                if (_totalAdditions > 0)
+                                  Text(
+                                    '+ \$ ${_totalAdditions.toStringAsFixed(2)}',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                if (_totalDiscounts > 0)
+                                  Text(
+                                    '- \$ ${_totalDiscounts.toStringAsFixed(2)}',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                Text(
+                                  "\$ ${_total.toStringAsFixed(2)}",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ],
