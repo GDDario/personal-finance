@@ -11,10 +11,10 @@ import 'package:personal_finance/domain/models/product.dart';
 import 'package:personal_finance/ui/new_expense/model/expense_table_row_data.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
-  double total = 250.78;
-  double totalItems = 2;
-  double totalDiscounts = 1;
-  double totalAdditions = 3;
+  double total = 0;
+  double totalItems = 0;
+  double totalDiscounts = 0;
+  double totalAdditions = 0;
   final List<DropdownMenuEntry<int>> menuItems = [
     DropdownMenuEntry(
       value: paymentMethodsMock[0].id,
@@ -38,30 +38,30 @@ class NewExpenseViewModel extends ChangeNotifier {
     ),
   ];
   List<ExpenseTableRowData> tableItems = [
-    ExpenseTableRowData(
-      id: productsMock.first.id.toString(),
-      name: productsMock.first.name,
-      categoryName: productsMock.first.category.name,
-      value: productsMock.first.price,
-      quantity: 1,
-      total: productsMock.first.price,
-    ),
-    ExpenseTableRowData(
-      id: productsMock[1].id.toString(),
-      name: productsMock[1].name,
-      categoryName: productsMock[1].category.name,
-      value: productsMock[1].price,
-      quantity: 1,
-      total: productsMock[1].price,
-    ),
-    ExpenseTableRowData(
-      id: productsMock[2].id.toString(),
-      name: productsMock[2].name,
-      categoryName: productsMock[2].category.name,
-      value: productsMock[2].price,
-      quantity: 1,
-      total: productsMock[2].price,
-    )
+    // ExpenseTableRowData(
+    //   id: productsMock.first.id.toString(),
+    //   name: productsMock.first.name,
+    //   categoryName: productsMock.first.category.name,
+    //   value: productsMock.first.price,
+    //   quantity: 1,
+    //   total: productsMock.first.price,
+    // ),
+    // ExpenseTableRowData(
+    //   id: productsMock[1].id.toString(),
+    //   name: productsMock[1].name,
+    //   categoryName: productsMock[1].category.name,
+    //   value: productsMock[1].price,
+    //   quantity: 1,
+    //   total: productsMock[1].price,
+    // ),
+    // ExpenseTableRowData(
+    //   id: productsMock[2].id.toString(),
+    //   name: productsMock[2].name,
+    //   categoryName: productsMock[2].category.name,
+    //   value: productsMock[2].price,
+    //   quantity: 1,
+    //   total: productsMock[2].price,
+    // )
   ];
 
   List<Adjustment> adjustments = adjustmentsMock;
@@ -96,21 +96,35 @@ class NewExpenseViewModel extends ChangeNotifier {
       ));
     }
 
+    calculateTotals();
     notifyListeners();
   }
 
   void changeItemPrice(dynamic newValue, int itemIndex) {
     tableItems[itemIndex].changeValue(double.parse(newValue));
+    calculateTotals();
     notifyListeners();
   }
 
   void changeQuantity(dynamic newQuantity, int itemIndex) {
     tableItems[itemIndex].changeQuantity(int.parse(newQuantity));
+    calculateTotals();
     notifyListeners();
   }
 
   void removeTableRow(ExpenseTableRowData row) {
     tableItems.remove(row);
+    calculateTotals();
     notifyListeners();
+  }
+
+  void calculateTotals() {
+    double itemsTotal = tableItems.fold(
+      0.0,
+      (double sum, ExpenseTableRowData element) => sum + element.total,
+    );
+    totalItems = itemsTotal;
+
+    total = totalItems;
   }
 }

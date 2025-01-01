@@ -143,7 +143,12 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                             )
                           ],
                         ),
-                        SummaryTable(viewModel: widget.viewModel),
+                        ChangeNotifierProvider(
+                          create: (_) => widget.viewModel,
+                          child: SummaryTable(
+                            viewModel: widget.viewModel,
+                          ),
+                        ),
                       ],
                     ),
                   ),
