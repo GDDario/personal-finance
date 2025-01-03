@@ -1,7 +1,6 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
-import 'package:provider/provider.dart';
 
 class ItemsTable extends StatefulWidget {
   final NewExpenseViewModel viewModel;
@@ -15,7 +14,7 @@ class ItemsTable extends StatefulWidget {
 class _ItemsTableState extends State<ItemsTable> {
   @override
   Widget build(BuildContext context) {
-    final rows = context.watch<NewExpenseViewModel>().tableItems;
+    final rows = widget.viewModel.tableItems;
 
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 800),

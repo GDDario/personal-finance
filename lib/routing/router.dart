@@ -37,8 +37,9 @@ GoRouter router() => GoRouter(
               path: Routes.newExpense,
               pageBuilder: (context, state) => buildPageWithAnimation(
                 state: state,
-                child: NewExpenseScreen(
-                  viewModel: NewExpenseViewModel()
+                child: ChangeNotifierProvider(
+                  create: (_) => NewExpenseViewModel(),
+                  child: NewExpenseScreen(),
                 ),
               ),
             ),

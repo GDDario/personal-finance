@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
-import 'package:provider/provider.dart';
 
 class SummaryTable extends StatelessWidget {
   final NewExpenseViewModel viewModel;
@@ -9,10 +8,10 @@ class SummaryTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double total = context.watch<NewExpenseViewModel>().total;
-    double totalItems = context.watch<NewExpenseViewModel>().totalItems;
-    double totalDiscounts = context.watch<NewExpenseViewModel>().totalDiscounts;
-    double totalAdditions = context.watch<NewExpenseViewModel>().totalAdditions;
+    double total = viewModel.total;
+    double totalItems = viewModel.totalItems;
+    double totalDiscounts = viewModel.totalDiscounts;
+    double totalAdditions = viewModel.totalAdditions;
 
     return Row(
       spacing: 15,

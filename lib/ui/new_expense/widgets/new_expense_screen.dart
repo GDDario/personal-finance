@@ -5,15 +5,14 @@ import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmode
 import 'package:personal_finance/ui/new_expense/widgets/adjustments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/attachments.dart';
 import 'package:personal_finance/ui/new_expense/widgets/items_table.dart';
+import 'package:personal_finance/ui/new_expense/widgets/payment_methods.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_establishment_text_field.dart';
 import 'package:personal_finance/ui/new_expense/widgets/search_items_text_field.dart';
 import 'package:personal_finance/ui/new_expense/widgets/summary_table.dart';
 import 'package:provider/provider.dart';
 
 class NewExpenseScreen extends StatefulWidget {
-  final NewExpenseViewModel viewModel;
-
-  const NewExpenseScreen({super.key, required this.viewModel});
+  const NewExpenseScreen({super.key});
 
   @override
   State<NewExpenseScreen> createState() => _NewExpenseScreenState();
@@ -32,6 +31,8 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final viewModel = context.watch<NewExpenseViewModel>();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -53,20 +54,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                   Row(
                     spacing: 15,
                     children: <Widget>[
-                      DropdownMenu(
-                        label: const Text('Payment method'),
-                        width: 220,
-                        initialSelection:
-                            widget.viewModel.menuItems.first.value,
-                        inputDecorationTheme:
-                            Theme.of(context).inputDecorationTheme,
-                        dropdownMenuEntries: widget.viewModel.menuItems,
-                        alignmentOffset: const Offset(250, 0),
-                        onSelected: (_) {},
-                      ),
                       SearchEstablishmentTextField(
                         controller: _establishmentController,
-                        viewModel: widget.viewModel,
+                        viewModel: viewModel,
                       ),
                       SizedBox(
                         width: 220,
@@ -77,12 +67,13 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                       ),
                     ],
                   ),
+                  PaymentMethods(viewModel: viewModel),
                   Row(
                     spacing: 15,
                     children: <Widget>[
                       SearchItemsTextField(
                         controller: _itemController,
-                        viewModel: widget.viewModel,
+                        viewModel: viewModel,
                       ),
                       Directionality(
                         textDirection: TextDirection.rtl,
@@ -94,13 +85,13 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                             color: Colors.white,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   ChangeNotifierProvider(
-                    create: (_) => widget.viewModel,
+                    create: (_) => viewModel,
                     child: ItemsTable(
-                      viewModel: widget.viewModel,
+                      viewModel: viewModel,
                     ),
                   ),
                   ConstrainedBox(
@@ -115,14 +106,14 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                             Row(
                               spacing: 15,
                               children: <Widget>[
-                                Adjustments(viewModel: widget.viewModel)
+                                Adjustments(viewModel: viewModel)
                               ],
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               spacing: 15,
                               children: <Widget>[
-                                Attachments(viewModel: widget.viewModel),
+                                Attachments(viewModel: viewModel),
                                 SizedBox(
                                   width: 150,
                                   child: ElevatedButton(
@@ -144,9 +135,9 @@ class _NewExpenseScreenState extends State<NewExpenseScreen> {
                           ],
                         ),
                         ChangeNotifierProvider(
-                          create: (_) => widget.viewModel,
+                          create: (_) => viewModel,
                           child: SummaryTable(
-                            viewModel: widget.viewModel,
+                            viewModel: viewModel,
                           ),
                         ),
                       ],
