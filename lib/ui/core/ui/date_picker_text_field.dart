@@ -42,7 +42,7 @@ class DatePickerTextField extends StatelessWidget {
             icon: const Icon(Icons.event_note),
           ),
         ),
-        labelText: "Date",
+        labelText: labelText,
       ),
     );
   }
