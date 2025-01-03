@@ -23,6 +23,12 @@ class MenuItems extends StatelessWidget {
           icon: Icons.money,
           route: Routes.newExpense,
         ),
+        SizedBox(height: 5),
+        _MenuItem(
+          title: 'Reports',
+          icon: Icons.newspaper,
+          route: Routes.reports,
+        ),
       ],
     );
   }

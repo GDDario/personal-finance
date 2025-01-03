@@ -6,10 +6,12 @@ import 'package:personal_finance/ui/core/ui/main_menu/widgets/main_menu.dart';
 import 'package:personal_finance/ui/dashboard/widgets/dashboard_screen.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 import 'package:personal_finance/ui/new_expense/widgets/new_expense_screen.dart';
+import 'package:personal_finance/ui/reports/view_models/reports_viewmodel.dart';
+import 'package:personal_finance/ui/reports/widgets/reports_screen.dart';
 import 'package:provider/provider.dart';
 
 GoRouter router() => GoRouter(
-      initialLocation: Routes.newExpense,
+      initialLocation: Routes.reports,
       routes: [
         ShellRoute(
           builder: (context, state, child) {
@@ -39,7 +41,17 @@ GoRouter router() => GoRouter(
                 state: state,
                 child: ChangeNotifierProvider(
                   create: (_) => NewExpenseViewModel(),
-                  child: NewExpenseScreen(),
+                  child: const NewExpenseScreen(),
+                ),
+              ),
+            ),
+            GoRoute(
+              path: Routes.reports,
+              pageBuilder: (context, state) => buildPageWithAnimation(
+                state: state,
+                child: ChangeNotifierProvider(
+                  create: (_) => ReportsViewModel(),
+                  child: const ReportsScreen(),
                 ),
               ),
             ),
