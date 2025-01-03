@@ -9,6 +9,7 @@ import 'package:personal_finance/domain/models/attachment.dart';
 import 'package:personal_finance/domain/models/discount.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/domain/models/generic_item.dart';
+import 'package:personal_finance/domain/models/payment_method.dart';
 import 'package:personal_finance/domain/models/product.dart';
 import 'package:personal_finance/ui/new_expense/model/expense_table_row_data.dart';
 
@@ -17,7 +18,7 @@ class NewExpenseViewModel extends ChangeNotifier {
   double totalItems = 0;
   double totalDiscounts = 0;
   double totalAdditions = 0;
-  final List<DropdownMenuEntry<int>> menuItems = [
+  final List<DropdownMenuEntry> menuItems = [
     DropdownMenuEntry(
       value: paymentMethodsMock[0].id,
       label: paymentMethodsMock[0].name,
@@ -39,33 +40,9 @@ class NewExpenseViewModel extends ChangeNotifier {
       label: paymentMethodsMock[4].name,
     ),
   ];
-  List<ExpenseTableRowData> tableItems = [
-    // ExpenseTableRowData(
-    //   id: productsMock.first.id.toString(),
-    //   name: productsMock.first.name,
-    //   categoryName: productsMock.first.category.name,
-    //   value: productsMock.first.price,
-    //   quantity: 1,
-    //   total: productsMock.first.price,
-    // ),
-    // ExpenseTableRowData(
-    //   id: productsMock[1].id.toString(),
-    //   name: productsMock[1].name,
-    //   categoryName: productsMock[1].category.name,
-    //   value: productsMock[1].price,
-    //   quantity: 1,
-    //   total: productsMock[1].price,
-    // ),
-    // ExpenseTableRowData(
-    //   id: productsMock[2].id.toString(),
-    //   name: productsMock[2].name,
-    //   categoryName: productsMock[2].category.name,
-    //   value: productsMock[2].price,
-    //   quantity: 1,
-    //   total: productsMock[2].price,
-    // )
-  ];
-
+  final List<PaymentMethod> paymentMethodsList = paymentMethodsMock;
+  List<PaymentMethod> paymentMethods = [];
+  List<ExpenseTableRowData> tableItems = [];
   List<Adjustment> adjustmentsList = adjustmentsMock;
   List<Adjustment> expenseAdjustments = [];
   List<Attachment> attachments = [];
@@ -73,6 +50,21 @@ class NewExpenseViewModel extends ChangeNotifier {
   late Establishment establishment;
   List<GenericItem> items = productsMock;
   List<GenericItem> selectedItems = [];
+
+  void addPaymentMethod(int index) {
+    // For some reason, the index comes as index + 1
+    index--;
+    PaymentMethod paymentMethod = paymentMethodsList[index];
+    if (!paymentMethods.contains(paymentMethod)) {
+      paymentMethods.add(paymentMethodsList[index]);
+      notifyListeners();
+    }
+  }
+
+  void removePaymentMethod(PaymentMethod paymentMethod) {
+    paymentMethods.remove(paymentMethod);
+    notifyListeners();
+  }
 
   void addDataRow(GenericItem item) {
     double value = 0;
