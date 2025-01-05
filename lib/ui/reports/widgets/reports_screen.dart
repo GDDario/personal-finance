@@ -47,7 +47,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                       SizedBox(
                         width: 220,
                         child: DatePickerTextField(
-                          controller: viewModel.startDateController,
+                          controller: viewModel.endDateController,
                           labelText: 'End date',
                         ),
                       ),
