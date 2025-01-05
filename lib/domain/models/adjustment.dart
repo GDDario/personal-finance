@@ -8,6 +8,7 @@ abstract class Adjustment {
   double value = 0;
 
   Adjustment(this.id, this.name);
+  Adjustment.withValue(this.id, this.name, this.value);
 
   String typeString();
 }
