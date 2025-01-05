@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:personal_finance/data/mock/adjustment_mock.dart';
+import 'package:personal_finance/data/mock/adjustments_mock.dart';
 import 'package:personal_finance/domain/models/adjustment.dart';
 import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/ui/core/themes/colors.dart';
