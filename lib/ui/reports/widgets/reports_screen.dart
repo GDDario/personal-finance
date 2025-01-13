@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:personal_finance/ui/core/themes/default_metrics.dart';
 import 'package:personal_finance/ui/core/ui/date_picker_text_field.dart';
 import 'package:personal_finance/ui/reports/view_models/reports_viewmodel.dart';
+import 'package:personal_finance/ui/reports/widgets/reports_table.dart';
 import 'package:provider/provider.dart';
 
 class ReportsScreen extends StatefulWidget {
@@ -51,8 +52,25 @@ class _ReportsScreenState extends State<ReportsScreen> {
                           labelText: 'End date',
                         ),
                       ),
+                      SizedBox(
+                        width: 220,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: const Row(
+                            children: [
+                              Text('Filter'),
+                              Spacer(),
+                              Icon(
+                                Icons.search,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ],
-                  )
+                  ),
+                  ReportsTable(viewModel: viewModel),
                 ],
               ),
             ],

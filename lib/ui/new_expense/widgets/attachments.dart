@@ -73,7 +73,7 @@ class _AttachmentsState extends State<Attachments> {
                             ),
                           ],
                         ),
-                        Tooltip
+                        Tooltip(
                           message: attachment.filePath,
                           child: Text(
                             attachment.filePath,

@@ -9,6 +9,7 @@ import 'package:personal_finance/domain/models/product_category.dart';
 
 List<Expense> expensesMock = [
   Expense(
+    1,
     110,
     100,
     20,
@@ -40,6 +41,7 @@ List<Expense> expensesMock = [
     ),
   ),
   Expense(
+    2,
     250,
     230,
     20,
@@ -70,6 +72,7 @@ List<Expense> expensesMock = [
     ),
   ),
   Expense(
+    3,
     500,
     480,
     30,
@@ -100,6 +103,7 @@ List<Expense> expensesMock = [
     ),
   ),
   Expense(
+    4,
     75,
     70,
     5,
@@ -129,6 +133,7 @@ List<Expense> expensesMock = [
     ),
   ),
   Expense(
+    5,
     300,
     280,
     40,
@@ -155,6 +160,7 @@ List<Expense> expensesMock = [
     ),
   ),
   Expense(
+    6,
     400,
     380,
     50,

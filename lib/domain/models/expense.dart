@@ -5,6 +5,7 @@ import 'package:personal_finance/domain/models/generic_item.dart';
 import 'package:personal_finance/domain/models/payment_method.dart';
 
 class Expense {
+  late int id;
   late double total;
   late double totalItems;
   late double totalAdditions;
@@ -16,7 +17,7 @@ class Expense {
   late List<Attachment> attachments;
   late DateTime dateTime;
 
-  Expense(this.total, this.totalItems, this.totalAdditions, this.totalDiscounts,
+  Expense(this.id, this.total, this.totalItems, this.totalAdditions, this.totalDiscounts,
       this.establishment, this.items, this.paymentMethods, this.adjustments,
       this.attachments, this.dateTime);
 }
