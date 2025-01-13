@@ -11,7 +11,7 @@ import 'package:personal_finance/domain/models/establishment.dart';
 import 'package:personal_finance/domain/models/generic_item.dart';
 import 'package:personal_finance/domain/models/payment_method.dart';
 import 'package:personal_finance/domain/models/product.dart';
-import 'package:personal_finance/ui/new_expense/model/expense_table_row_data.dart';
+import 'package:personal_finance/ui/new_expense/models/expense_table_row_data.dart';
 
 class NewExpenseViewModel extends ChangeNotifier {
   double total = 0;
