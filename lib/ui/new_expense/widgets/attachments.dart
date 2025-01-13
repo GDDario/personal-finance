@@ -20,7 +20,7 @@ class _AttachmentsState extends State<Attachments> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 180,
+      width: 220,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 10,
@@ -53,16 +53,33 @@ class _AttachmentsState extends State<Attachments> {
                     child: Column(
                       children: [
                         Row(
+                          spacing: 2,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(attachment.fileName),
-                            Text("${attachment.fileSize} bytes")
+                            Expanded(
+                              flex: 2,
+                              child: Tooltip(
+                                message: attachment.fileName,
+                                child: Text(
+                                  attachment.fileName,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Text("${attachment.fileSize} bytes"),
+                            ),
                           ],
                         ),
-                        Text(
-                          attachment.filePath,
-                          style: Theme.of(context).textTheme.labelSmall,
-                          overflow: TextOverflow.ellipsis,
+                        Tooltip
+                          message: attachment.filePath,
+                          child: Text(
+                            attachment.filePath,
+                            style: Theme.of(context).textTheme.labelSmall,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),

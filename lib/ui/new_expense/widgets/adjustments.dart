@@ -30,14 +30,17 @@ class _AdjustmentsState extends State<Adjustments> {
         spacing: 15,
         runSpacing: 20,
         children: <Widget>[
-          Directionality(
-            textDirection: TextDirection.rtl,
-            child: ElevatedButton.icon(
-              onPressed: _openAdjustmentOptionsDialog,
-              label: const Text('Add discount/addition'),
-              icon: const Icon(
-                Icons.add,
-                color: Colors.white,
+          SizedBox(
+            width: 220,
+            child: Directionality(
+              textDirection: TextDirection.rtl,
+              child: ElevatedButton.icon(
+                onPressed: _openAdjustmentOptionsDialog,
+                label: const Text('Add discount/addition'),
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
