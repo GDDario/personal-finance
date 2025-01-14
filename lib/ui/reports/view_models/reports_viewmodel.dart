@@ -6,18 +6,30 @@ import 'package:personal_finance/ui/reports/models/expenses_table_row_data.dart'
 class ReportsViewModel extends ChangeNotifier {
   TextEditingController startDateController = TextEditingController();
   TextEditingController endDateController = TextEditingController();
-  List<ExpensesTableRowData> tableItems = expensesMock.map((Expense expense) {
-    return ExpensesTableRowData(
-      expense.id,
-      expense.establishment.name,
-      expense.items.length,
-      expense.totalItems,
-      expense.adjustments.length,
-      expense.totalAdditions,
-      expense.totalDiscounts,
-      expense.attachments.length,
-      expense.total,
-      expense.dateTime,
-    );
-  }).toList();
+  List<Expense> expenses = expensesMock;
+  List<ExpensesTableRowData> tableItems = [];
+
+  void loadExpenses() {
+    expenses = expensesMock;
+    tableItems = expensesMock.map((Expense expense) {
+      return ExpensesTableRowData(
+        expense.id,
+        expense.establishment.name,
+        expense.items.length,
+        expense.totalItems,
+        expense.adjustments.length,
+        expense.totalAdditions,
+        expense.totalDiscounts,
+        expense.attachments.length,
+        expense.total,
+        expense.dateTime,
+      );
+    }).toList();
+    notifyListeners();
+  }
+
+  void filterTable() {
+
+    notifyListeners();
+  }
 }

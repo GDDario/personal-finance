@@ -6,13 +6,22 @@ import 'package:personal_finance/ui/reports/widgets/reports_table.dart';
 import 'package:provider/provider.dart';
 
 class ReportsScreen extends StatefulWidget {
-  const ReportsScreen({super.key});
+  final ReportsViewModel viewModel;
+  const ReportsScreen({super.key, required this.viewModel});
 
   @override
   State<ReportsScreen> createState() => _ReportsScreenState();
 }
 
 class _ReportsScreenState extends State<ReportsScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    widget.viewModel.loadExpenses();
+  }
+
   @override
   Widget build(BuildContext context) {
     final ReportsViewModel viewModel = context.watch<ReportsViewModel>();

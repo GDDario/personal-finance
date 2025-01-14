@@ -47,13 +47,17 @@ GoRouter router() => GoRouter(
             ),
             GoRoute(
               path: Routes.reports,
-              pageBuilder: (context, state) => buildPageWithAnimation(
-                state: state,
-                child: ChangeNotifierProvider(
-                  create: (_) => ReportsViewModel(),
-                  child: const ReportsScreen(),
-                ),
-              ),
+              pageBuilder: (context, state) {
+                final viewModel = ReportsViewModel();
+
+                return buildPageWithAnimation(
+                  state: state,
+                  child: ChangeNotifierProvider(
+                    create: (_) => viewModel,
+                    child: ReportsScreen(viewModel: viewModel,),
+                  ),
+                );
+              }
             ),
           ],
         ),
