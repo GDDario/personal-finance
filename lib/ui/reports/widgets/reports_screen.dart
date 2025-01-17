@@ -62,7 +62,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
                         ),
                       ),
                       SizedBox(
-                        width: 220,
+                        width: 110,
                         child: ElevatedButton(
                           onPressed: () => widget.viewModel.filterTable(),
                           child: const Row(
