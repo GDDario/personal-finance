@@ -88,7 +88,7 @@ class _ReportsTableState extends State<ReportsTable> {
                                 child: IconButton(
                                   icon: const Icon(Icons.delete,
                                       color: AppColors.red1),
-                                  onPressed: () {},
+                                  onPressed: () => showDeleteDialog(row.id),
                                 ),
                               ),
                             ],
@@ -104,5 +104,57 @@ class _ReportsTableState extends State<ReportsTable> {
         ),
       ),
     );
+  }
+
+  void showDeleteDialog(int expenseId) {
+    showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return AlertDialog(
+            title: Text(
+              "Delete expense",
+              style: TextStyle(
+                fontSize: Theme.of(context).textTheme.headlineLarge!.fontSize,
+              ),
+            ),
+            backgroundColor: Colors.white,
+            content: const Column(
+              mainAxisSize: MainAxisSize.min,
+              spacing: 12,
+              children: [
+                Text("Are you sure you want to delete this register?"),
+                Row(
+                  children: [
+                    Text("Obs: this action"),
+                    Text(" can not ", style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text("be undone"),
+                  ],
+                ),
+              ],
+            ),
+            actions: [
+              Row(
+                spacing: 12,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop();
+                    },
+                    child: const Text('Close'),
+                  ),
+                  ElevatedButton(
+                    style: ButtonStyle(backgroundColor: WidgetStatePropertyAll(AppColors.red1)),
+                    onPressed: () {
+                      widget.viewModel.deleteExpense(expenseId);
+                      Navigator.of(dialogContext).pop();
+                    },
+                    child: const Text('Delete'),
+                  ),
+                ],
+              ),
+            ],
+          );
+        });
   }
 }

@@ -9,8 +9,7 @@ class ReportsViewModel extends ChangeNotifier {
   List<Expense> expenses = expensesMock;
   List<ExpensesTableRowData> tableItems = [];
 
-  void loadExpenses() {
-    expenses = expensesMock;
+  void mapTableItems() {
     tableItems = expenses.map((Expense expense) {
       return ExpensesTableRowData(
         expense.id,
@@ -25,6 +24,12 @@ class ReportsViewModel extends ChangeNotifier {
         expense.dateTime,
       );
     }).toList();
+  }
+
+  void loadExpenses() {
+    expenses = expensesMock;
+    mapTableItems();
+
     notifyListeners();
   }
 
@@ -70,6 +75,15 @@ class ReportsViewModel extends ChangeNotifier {
         expense.dateTime,
       );
     }).toList();
+
+    notifyListeners();
+  }
+
+  void deleteExpense(int expenseId) {
+    Expense expense = expenses.firstWhere((Expense expense) => expense.id == expenseId);
+
+    expenses.remove(expense);
+    mapTableItems();
 
     notifyListeners();
   }
