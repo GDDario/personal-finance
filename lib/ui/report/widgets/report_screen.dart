@@ -28,7 +28,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 children: [
                   IconButton(
                     onPressed: () => context.go("/reports"),
-                    icon: Icon(Icons.arrow_back),
+                    icon: const Icon(Icons.arrow_back),
                   ),
                   const Text(
                     "Go back to the reports page",
@@ -39,7 +39,7 @@ class _ReportScreenState extends State<ReportScreen> {
                 "Expense #${widget.viewModel.expenseId}",
                 style: Theme.of(context).textTheme.headlineLarge,
               ),
-              Column()
+              const Column()
             ],
           ),
         ),
