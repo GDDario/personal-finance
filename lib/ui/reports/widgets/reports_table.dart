@@ -1,5 +1,6 @@
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_finance/ui/core/themes/colors.dart';
 import 'package:personal_finance/ui/reports/view_models/reports_viewmodel.dart';
@@ -73,7 +74,7 @@ class _ReportsTableState extends State<ReportsTable> {
                                 child: IconButton(
                                   icon: const Icon(Icons.remove_red_eye,
                                       color: AppColors.grey2),
-                                  onPressed: () {},
+                                  onPressed: () => context.go("/reports/${row.id}"),
                                 ),
                               ),
                               Tooltip(

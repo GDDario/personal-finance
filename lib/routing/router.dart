@@ -6,6 +6,8 @@ import 'package:personal_finance/ui/core/ui/main_menu/widgets/main_menu.dart';
 import 'package:personal_finance/ui/dashboard/widgets/dashboard_screen.dart';
 import 'package:personal_finance/ui/new_expense/view_models/new_expense_viewmodel.dart';
 import 'package:personal_finance/ui/new_expense/widgets/new_expense_screen.dart';
+import 'package:personal_finance/ui/report/view_models/report_viewmodel.dart';
+import 'package:personal_finance/ui/report/widgets/report_screen.dart';
 import 'package:personal_finance/ui/reports/view_models/reports_viewmodel.dart';
 import 'package:personal_finance/ui/reports/widgets/reports_screen.dart';
 import 'package:provider/provider.dart';
@@ -46,19 +48,40 @@ GoRouter router() => GoRouter(
               ),
             ),
             GoRoute(
-              path: Routes.reports,
-              pageBuilder: (context, state) {
-                final viewModel = ReportsViewModel();
+                path: Routes.reports,
+                pageBuilder: (context, state) {
+                  final viewModel = ReportsViewModel();
 
-                return buildPageWithAnimation(
-                  state: state,
-                  child: ChangeNotifierProvider(
-                    create: (_) => viewModel,
-                    child: ReportsScreen(viewModel: viewModel,),
-                  ),
-                );
-              }
-            ),
+                  return buildPageWithAnimation(
+                    state: state,
+                    child: ChangeNotifierProvider(
+                      create: (_) => viewModel,
+                      child: ReportsScreen(
+                        viewModel: viewModel,
+                      ),
+                    ),
+                  );
+                },
+                routes: [
+                  GoRoute(
+                    path: Routes.report,
+                    pageBuilder: (context, state) {
+                      final id = state.pathParameters['id'] ;
+                      print("Route id: ${id}");
+                      final viewModel = ReportViewModel(id!);
+
+                      return buildPageWithAnimation(
+                        state: state,
+                        child: ChangeNotifierProvider(
+                          create: (_) => viewModel,
+                          child: ReportScreen(
+                            viewModel: viewModel,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                ]),
           ],
         ),
       ],
